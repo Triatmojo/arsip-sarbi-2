@@ -3,9 +3,11 @@
 <?= $this->section('content'); ?>
 <div class="row">
     <div class="col-lg-12">
+    <?= ; ?>
         <div class="card">
             <div class="card-header">
                 <a href="/users/add" class="btn btn-info btn-sm "><i class="fa fa-plus"></i> Add</a>
+                <a href="#" class="btn btn-danger btn-sm "><i class="fa fa-trash"></i> Delete</a>
                 <div class="card-tools">
                     <button class="btn btn tool" data-card-widget="collapse">
                         <i class="fa fa-minus"></i>
@@ -16,6 +18,7 @@
                 <table class="table table-hover table-striped" id="datatable">
                     <thead class="text-secondary">
                         <tr>
+                            <th><input type="checkbox" id="select_all" class="text-center"></th>
                             <th>No.</th>
                             <th>Nama</th>
                             <th>Username</th>
@@ -30,13 +33,14 @@
                         $no = 1;
                         foreach ($user as $u) : ?>
                             <tr>
+                                <td><input type="checkbox" name="checked[]" class="check" value="<?= $u['user_id'] ?>"></td>
                                 <td><?= $no++; ?></td>
                                 <td><?= $u['nama_lengkap'] ?></td>
                                 <td><?= $u['username'] ?></td>
                                 <td><?= $u['email'] ?></td>
                                 <td><?= $u['no_telp'] ?></td>
                                 <td>
-                                    <span class="badge badge-<?= $u['role'] == 'admin' ? 'success' : 'info' ?>">
+                                    <span class=" badge badge-<?= $u['role'] == 'admin' ? 'success' : 'info' ?>">
                                         <?= $u['role']; ?>
                                     </span>
                                 </td>
@@ -68,3 +72,28 @@
     </div>
 </div>
 <?= $this->endsection(); ?>
+
+<?= $this->section('addons'); ?>
+<script>
+    $(function() {
+        $('#select_all').on('click', function() {
+            if (this.checked) {
+                $('.check').each(function() {
+                    this.checked = true;
+                    $('#select_all').prop('checked', true);
+                })
+            } else {
+                $('.check').each(function() {
+                    this.checked = false;
+                    $('#select_all').prop('checked', false);
+                });
+            }
+        })
+    })
+
+    $(function deleteAll() {
+        var attr = $('#datatable tbody tr .check:checked').length;
+        console.log(attr);
+    });
+</script>
+<?= $this->endSection(); ?>

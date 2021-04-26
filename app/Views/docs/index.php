@@ -31,92 +31,92 @@
                 </thead>
                 <tbody>
                     <?php if ($folder_parent != 0) : ?>
-                    <tr>
-                        <td>
-                            <i class="fa fa-arrow-left text-secondary"></i>
-                        </td>
-                        <td>
-                            <a href="<?= base_url('docs').'/'.$prev_folder; ?>">
-                                Kembali ...
-                            </a>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <?php endif;?>
+                        <tr>
+                            <td>
+                                <i class="fa fa-arrow-left text-secondary"></i>
+                            </td>
+                            <td>
+                                <a href="<?= base_url('docs') . '/' . $prev_folder; ?>">
+                                    Kembali ...
+                                </a>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    <?php endif; ?>
                     <?php if ($folder) : ?>
-                    <?php foreach ($folder as $row) : ?>
-                    <tr>
-                        <td class="text-center">
-                            <i class="fas fa-fw fa-folder text-secondary"></i>
-                        </td>
-                        <td>
-                            <a class="list-item" href="<?= base_url('docs/'.$row['folder_id']); ?>">
-                                <?= $row['folder_name']; ?>
-                            </a>
-                        </td>
-                        <td>
-                            <?= time_ago($row['updated_at']); ?>
-                        </td>
-                        <td>-</td>
-                        <td>
-                            <div class="btn-group dropdown text-center">
-                                <button type="button" class="btn btn-sm btn-link text-center" data-toggle="dropdown">
-                                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <button data-id="<?= $row['folder_id'] ?>" data-nama="<?= $row['folder_name']; ?>" type="button" class="dropdown-item btnEditFolder">Rename</button>
-                                    <a href="<?= base_url() ?>/docs/deleteFolder/<?= $row['folder_id'] ?>" class="dropdown-item">Hapus</a>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
+                        <?php foreach ($folder as $row) : ?>
+                            <tr>
+                                <td class="text-center">
+                                    <i class="fas fa-fw fa-folder text-secondary"></i>
+                                </td>
+                                <td class="text-secondary">
+                                    <a class="list-item" href="<?= base_url('docs/' . $row['folder_id']); ?>">
+                                        <?= $row['folder_name']; ?>
+                                    </a>
+                                </td>
+                                <td>
+                                    <?= time_ago($row['updated_at']); ?>
+                                </td>
+                                <td>-</td>
+                                <td>
+                                    <div class="btn-group dropdown text-center">
+                                        <button type="button" class="btn btn-sm btn-link text-center" data-toggle="dropdown">
+                                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <button data-id="<?= $row['folder_id'] ?>" data-nama="<?= $row['folder_name']; ?>" type="button" class="dropdown-item btnEditFolder">Rename</button>
+                                            <a href="<?= base_url() ?>/docs/deleteFolder/<?= $row['folder_id'] ?>" class="dropdown-item" onclick="return confirm('Yakin dihapus?')">Hapus</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     <?php endif; ?>
 
                     <?php if ($files) : ?>
-                    <?php foreach ($files as $file) : ?>
-                    <tr>
-                        <td class="text-center">
-                            <i class="fas fa-fw fa-file text-secondary"></i>
-                        </td>
-                        <td>
-                            <a href="<?= base_url() ?>/files/<?= $file['file']; ?>" target="_blank">
-                                <?= $file['nama_file']; ?>
-                            </a>
-                        </td>
-                        <td>
-                            <?= time_ago($file['updated_at']); ?>
-                        </td>
-                        <td>
-                            <?php
-                            if (is_file(FCPATH.'files/'.$file['file'])) {
-                                echo smarty_filesize(filesize(FCPATH.'files/'.$file['file']));
-                            } else {
-                                echo "unknown";
-                            }
-                            ?>
-                        </td>
-                        <td>
-                            <div class="btn-group dropdown">
-                                <button type="button" class="btn btn-sm btn-link" data-toggle="dropdown">
-                                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <button type="button" class="dropdown-item btn-rename-file" data-id="<?= $file['file_id'] ?>" data-nama="<?= $file['nama_file'] ?>" data-folder="<?= $file['folder_id'] ?>">Rename</button>
-                                    <a href="<?= base_url() ?>/docs/deleteFile/<?= $file['file_id'] ?>" class="dropdown-item" onclick="return confirm('Yakin dihapus?')">Hapus</a>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
+                        <?php foreach ($files as $file) : ?>
+                            <tr>
+                                <td class="text-center">
+                                    <i class="fas fa-fw fa-file text-secondary"></i>
+                                </td>
+                                <td>
+                                    <a href="<?= base_url() ?>/files/<?= $file['file']; ?>" target="_blank">
+                                        <?= $file['nama_file']; ?>
+                                    </a>
+                                </td>
+                                <td>
+                                    <?= time_ago($file['updated_at']); ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    if (is_file(FCPATH . 'files/' . $file['file'])) {
+                                        echo smarty_filesize(filesize(FCPATH . 'files/' . $file['file']));
+                                    } else {
+                                        echo "unknown";
+                                    }
+                                    ?>
+                                </td>
+                                <td>
+                                    <div class="btn-group dropdown">
+                                        <button type="button" class="btn btn-sm btn-link" data-toggle="dropdown">
+                                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <button type="button" class="dropdown-item btn-rename-file" data-id="<?= $file['file_id'] ?>" data-nama="<?= $file['nama_file'] ?>" data-folder="<?= $file['folder_id'] ?>">Rename</button>
+                                            <a href="<?= base_url() ?>/docs/deleteFile/<?= $file['file_id'] ?>" class="dropdown-item" onclick="return confirm('Yakin dihapus?')">Hapus</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     <?php endif; ?>
 
-                    <?php if (!$folder && !$files): ?>
-                    <tr>
-                        <td colspan="5" class="text-center">Tidak ada item</td>
-                    </tr>
+                    <?php if (!$folder && !$files) : ?>
+                        <tr>
+                            <td colspan="5" class="text-center">Tidak ada item</td>
+                        </tr>
                     <?php endif; ?>
                 </tbody>
             </table>
@@ -161,87 +161,87 @@
 
 <?= $this->section('addons'); ?>
 <script type="text/javascript">
-function editFolder(id, name) {
-    let modal = $('#formModal'),
-        base_url = "<?= base_url() ?>";
+    function editFolder(id, name) {
+        let modal = $('#formModal'),
+            base_url = "<?= base_url() ?>";
 
-    let folder_id = $('#folder_id');
-    let folder_name = $('#folder_name');
+        let folder_id = $('#folder_id');
+        let folder_name = $('#folder_name');
 
-    modal.modal('show');
+        modal.modal('show');
 
-    // Edit Modal
-    modal.find('.modal-title').text('Rename');
-    modal.find('.modal-footer [type=submit]').text('Rename');
+        // Edit Modal
+        modal.find('.modal-title').text('Rename');
+        modal.find('.modal-footer [type=submit]').text('Rename');
 
-    folder_id.val(id);
-    folder_name.val(name);
+        folder_id.val(id);
+        folder_name.val(name);
 
-    // Tambah Modal
-    modal.on('hidden.bs.modal', function() {
-        modal.find('.modal-title').text('Buat Folder');
+        // Tambah Modal
+        modal.on('hidden.bs.modal', function() {
+            modal.find('.modal-title').text('Buat Folder');
 
-        folder_id.val('');
-        folder_name.val('');
-    });
-}
+            folder_id.val('');
+            folder_name.val('');
+        });
+    }
 
-function renameFile(id, name, folder) {
-    let modal = $('#renameFile'),
-        base_url = "<?= base_url() ?>";
+    function renameFile(id, name, folder) {
+        let modal = $('#renameFile'),
+            base_url = "<?= base_url() ?>";
 
-    let file_id = $('#renameFile #file_id');
-    let file_name = $('#renameFile #nama_file');
-    let folder_id = $('#renameFile #folder_id');
+        let file_id = $('#renameFile #file_id');
+        let file_name = $('#renameFile #nama_file');
+        let folder_id = $('#renameFile #folder_id');
 
-    modal.modal('show');
+        modal.modal('show');
 
-    file_id.val(id);
-    file_name.val(name);
-    folder_id.val(folder);
+        file_id.val(id);
+        file_name.val(name);
+        folder_id.val(folder);
 
-    // Tambah Modal
-    modal.on('hidden.bs.modal', function() {
-        file_id.val('');
-        file_name.val('');
-        file_id.val('');
-    });
-}
+        // Tambah Modal
+        modal.on('hidden.bs.modal', function() {
+            file_id.val('');
+            file_name.val('');
+            file_id.val('');
+        });
+    }
 
-$(function() {
-    $('.dropdown-toggle').dropdown();
+    $(function() {
+        $('.dropdown-toggle').dropdown();
 
-    <?php if ($validation->hasError('folder_name')) : ?>
-    $('#formModal').modal('show');
-    <?php endif; ?>
+        <?php if ($validation->hasError('folder_name')) : ?>
+            $('#formModal').modal('show');
+        <?php endif; ?>
 
-    $(document).ready(function() {
-        $('#browse').DataTable({
-            "paging": false,
-            "ordering": false,
-            "info": false,
-            "dom": "<'row px-2 px-md-4 pt-2'<'col-md'f>>" +
-                "<'row'<'col-md-12'tr>>"
+        $(document).ready(function() {
+            $('#browse').DataTable({
+                "paging": false,
+                "ordering": false,
+                "info": false,
+                "dom": "<'row px-2 px-md-4 pt-2'<'col-md'f>>" +
+                    "<'row'<'col-md-12'tr>>"
+            });
+        });
+
+        $('.tambahFolder').on('click', function() {
+            $('#formModalLabel').html('Tambah Folder');
+            $('.modal-footer button[type=submit]').html('Tambah');
+        });
+
+        $('body .btnEditFolder').on('click', function() {
+            let id = $(this).data('id');
+            let name = $(this).data('nama');
+            editFolder(id, name);
+        });
+
+        $('body .btn-rename-file').on('click', function() {
+            let id = $(this).data('id');
+            let name = $(this).data('nama');
+            let folder = $(this).data('folder');
+            renameFile(id, name, folder);
         });
     });
-
-    $('.tambahFolder').on('click', function() {
-        $('#formModalLabel').html('Tambah Folder');
-        $('.modal-footer button[type=submit]').html('Tambah');
-    });
-
-    $('body .btnEditFolder').on('click', function() {
-        let id = $(this).data('id');
-        let name = $(this).data('nama');
-        editFolder(id, name);
-    });
-
-    $('body .btn-rename-file').on('click', function() {
-        let id = $(this).data('id');
-        let name = $(this).data('nama');
-        let folder = $(this).data('folder');
-        renameFile(id, name, folder);
-    });
-});
 </script>
 <?= $this->endSection();

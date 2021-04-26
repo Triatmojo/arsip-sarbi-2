@@ -12,10 +12,11 @@ class Auth extends BaseController
 
     public function index()
     {
+
         $fruit = ['Anggur', 'Mangga', 'Melon', 'Apel', 'Alpukat', 'Kiwi', 'Sirsak', 'Jambu', 'Nanas', 'Pisang'];
         $data = [
             'title' => "Login",
-            'captcha' => $fruit[rand(0, 10)],
+            'captcha' => $fruit[rand(0, 9)],
             'validation' => $this->validation
         ];
 
@@ -56,7 +57,7 @@ class Auth extends BaseController
             setMsg('danger', 'Username tidak terdaftar!');
         } else {
             if (password_verify($password, $user['password'])) {
-                if ($user['role'] === 'admin') {
+                if ($user['role']) {
                     session()->set('sarbi-sic', $user['user_id']);
                     return redirect()->to('/home');
                 }
@@ -64,7 +65,7 @@ class Auth extends BaseController
                 setMsg('danger', 'Password anda salah!');
             }
         }
-        return redirect()->to('/auth');
+        return redirect()->to('/auth')->withInput();
     }
 
     private function _rules()

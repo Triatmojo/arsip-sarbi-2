@@ -43,6 +43,7 @@ class BaseController extends Controller
 		parent::initController($request, $response, $logger);
 
 		session();
+		date_default_timezone_set('Asia/Jakarta');
 		//--------------------------------------------------------------------
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------

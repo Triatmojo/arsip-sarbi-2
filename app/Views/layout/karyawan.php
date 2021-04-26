@@ -25,7 +25,7 @@
     <div class="wrapper">
 
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand-md navbar-light bg-lightblue navbar-white">
+        <nav class="main-header navbar navbar-expand-md navbar-dark bg-lightblue navbar-white">
             <div class="container">
                 <a href="<?= base_url() ?>/home" class="navbar-brand">
                     <img src="<?= base_url() ?>/img/logo_besar.png" alt="SIC Logo" class="brand-image" style="opacity: .8">
@@ -36,7 +36,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse order-3" id="navbarCollapse">
+                <div class="collapse navbar-collapse order-3 justify-content-end" id="navbarCollapse">
                     <!-- Left navbar links -->
                     <ul class="navbar-nav">
                         <li class="nav-item">
@@ -51,11 +51,14 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link">Laporan</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url() ?>/users" class="nav-link <?= activeMenu('users'); ?>">User
-                                Management
-                            </a>
-                        </li>
+                        <?php if (is_admin()) : ?>
+                            <li class="nav-item">
+                                <a href="<?= base_url() ?>/users" class="nav-link <?= activeMenu('users'); ?>">User
+                                    Management
+                                </a>
+                            </li>
+                        <?php endif; ?>
+
                         <li class="nav-item dropdown">
                             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Logout</a>
                             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
@@ -172,6 +175,8 @@
     <script type="text/javascript">
         $(document).ready(function() {
             var table = $('#datatable').DataTable({
+                processing: true,
+                severSide: true,
                 buttons: ['copy', 'csv', 'print', 'excel'],
                 dom: "<'row px-2 px-md-4 pt-2'<'col-md-3'l><'col-md-5 text-center'B><'col-md-4'f>>" +
                     "<'row'<'col-md-12'tr>>" +
@@ -247,6 +252,7 @@
     </script>
 
     <?= $this->renderSection('addons'); ?>
+
 </body>
 
 </html>

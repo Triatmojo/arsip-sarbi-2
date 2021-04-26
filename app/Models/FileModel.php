@@ -10,11 +10,10 @@ class FileModel extends Model
     protected  $primaryKey = 'file_id';
     protected $useTimestamps = true;
 
-    protected $allowedFields = ['folder_id', 'nama_file', 'tgl_file', 'file'];
+    protected $allowedFields = ['folder_id', 'nama_file', 'file'];
 
     public function getFilebyFolder($folder_id)
     {
-
         $this->where(['folder_id' => $folder_id]);
         return $this->findAll();
     }

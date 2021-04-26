@@ -46,6 +46,11 @@ function userdata($data = null)
     return $getUser[$data];
 }
 
+function is_admin()
+{
+    return userdata('role') == 'admin' ? 1 : 0;
+}
+
 function smarty_filesize($size)
 {
     $size = max(0, (int)$size);
@@ -66,7 +71,7 @@ if (!function_exists('time_ago')) {
         $difference     = $now - $time;
         $tense         = "ago";
 
-        for ($j = 0; $difference >= $lengths[$j] && $j < count($lengths) - 1; $j++) {
+        for ($j = 0; $difference > $lengths[$j] && $j < count($lengths) - 1; $j++) {
             $difference /= $lengths[$j];
         }
 
