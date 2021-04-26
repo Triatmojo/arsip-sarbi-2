@@ -3,11 +3,11 @@
 <?= $this->section('content'); ?>
 <div class="row">
     <div class="col-lg-12">
-    <?= ; ?>
+        <?= form_open('users/multi_delete', ['user_id' => 'form-deleteAll']) ?>
         <div class="card">
             <div class="card-header">
                 <a href="/users/add" class="btn btn-info btn-sm "><i class="fa fa-plus"></i> Add</a>
-                <a href="#" class="btn btn-danger btn-sm "><i class="fa fa-trash"></i> Delete</a>
+                <button type="button" onclick="delete_all()" class="btn btn-danger btn-sm "><i class="fa fa-trash"></i> Delete</button>
                 <div class="card-tools">
                     <button class="btn btn tool" data-card-widget="collapse">
                         <i class="fa fa-minus"></i>
@@ -71,6 +71,7 @@
         </div>
     </div>
 </div>
+<?= form_close(); ?>
 <?= $this->endsection(); ?>
 
 <?= $this->section('addons'); ?>
@@ -90,10 +91,5 @@
             }
         })
     })
-
-    $(function deleteAll() {
-        var attr = $('#datatable tbody tr .check:checked').length;
-        console.log(attr);
-    });
 </script>
 <?= $this->endSection(); ?>
