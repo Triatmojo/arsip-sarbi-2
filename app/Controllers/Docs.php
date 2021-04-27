@@ -78,21 +78,19 @@ class Docs extends BaseController
                 // get file name
                 $fileName = $fileDoc->getRandomName();
                 // move file to folder
-                $fileDoc->move('files', $fileName);
-
+                
                 $data = $this->request->getVar(null, FILTER_SANITIZE_STRING);
                 $data['file'] = $fileDoc;
-
+                
                 $nmFile = explode('.', $fileDoc->getClientName());
                 array_pop($nmFile);
                 $realFile = implode(' ', $nmFile);
+                
+                $data['nama_file'] = $realFile;
+                $data['folder_id'] = $data['folder_id'];
+                $data['file'] = $fileName;
 
-                $data = [
-                    'nama_file' => $realFile,
-                    'folder_id' => $data['folder_id'],
-                    'file' => $fileName
-                ];
-
+                $fileDoc->move('files', $fileName);
                 $this->fileModel->save($data);
             }
         } else {
@@ -104,7 +102,6 @@ class Docs extends BaseController
 
     public function renameFile()
     {
-
         $data = $this->request->getVar(null, FILTER_SANITIZE_STRING);
         $data['folder_id'] = $data['folder_id'];
         $this->fileModel->save($data);

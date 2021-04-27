@@ -14,7 +14,7 @@
                     <?php if ($folder_parent != 0) : ?>
                         <?php if ($this_folder['kategori_id'] != 0) : ?>
                             <div class="form-group">
-                                <label for="jenis_id">Jenis File</label>
+                                <label for="jenis_id">Jenis Files</label>
                                 <select name="jenis_id" id="jenis_id" class="form-control">
                                     <option value="0">None</option>
                                     <?php foreach ($jenis as $j) : ?>
