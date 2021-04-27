@@ -11,6 +11,20 @@
             <form action="<?= base_url() ?>/docs/addFile" method="POST" enctype="multipart/form-data">
                 <?= csrf_field(); ?>
                 <div class="modal-body">
+                    <?php if ($folder_parent != 0) : ?>
+                        <?php if ($this_folder['kategori_id'] != 0) : ?>
+                            <div class="form-group">
+                                <label for="jenis_id">Jenis File</label>
+                                <select name="jenis_id" id="jenis_id" class="form-control">
+                                    <option value="0">None</option>
+                                    <?php foreach ($jenis as $j) : ?>
+                                        <option value="<?= $j['jenis_id'] ?>"><?= $j['jenis_nama']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        <?php endif; ?>
+                    <?php endif; ?>
+
                     <div class="custom-file">
                         <input type="file" name="file" class="custom-file-input" id="file" accept=".zip,.ZIP,.rar,.RAR,.7z,.iso,application/octet-stream,application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
 text/plain, application/pdf, image/*">

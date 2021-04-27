@@ -4,16 +4,29 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <a href="#" class="btn btn-primary tambahFolder" data-toggle="modal" data-target="#formModal">
-                <i class="fas fa-plus fa-fw"></i> Folder Baru
-            </a>
-            <a href="#" class="btn btn-secondary" data-toggle="modal" data-target="#fileModal">
-                <i class="fas fa-upload fa-fw"></i> Upload File
-            </a>
-            <div class="card-tools">
-                <button class="btn btn tool" data-card-widget="collapse">
-                    <i class="fa fa-minus"></i>
-                </button>
+            <div class="row">
+                <div class="col">
+                    <?php if ($folder_parent != 0) : ?>
+                        <?php if ($this_folder['folder_id'] != 0) : ?>
+                            <h3 class="card-title align-self-center">
+                                <?= $this_folder['folder_name']; ?>
+                            </h3>
+                            <br>
+                            <?php if ($this_folder['kategori_id'] != 0) : ?>
+                                <span class="badge badge-primary"><?= $this_folder['kategori_nama']; ?></span>
+                            <?php endif; ?>
+
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </div>
+                <div class="col text-right">
+                    <a href="#" class="btn btn-primary tambahFolder" data-toggle="modal" data-target="#formModal">
+                        <i class="fas fa-plus fa-fw"></i> Folder Baru
+                    </a>
+                    <a href="#" class="btn btn-secondary" data-toggle="modal" data-target="#fileModal">
+                        <i class="fas fa-upload fa-fw"></i> Upload File
+                    </a>
+                </div>
             </div>
         </div>
         <div class="card-body card-outline-left p-0">
@@ -25,6 +38,7 @@
                         </th>
                         <th>Nama</th>
                         <th>Updated</th>
+                        <th>Jenis/kategori</th>
                         <th>Size</th>
                         <th>Opsi</th>
                     </tr>
@@ -59,6 +73,7 @@
                                 <td>
                                     <?= time_ago($row['updated_at']); ?>
                                 </td>
+                                <td><?= $row['kategori_nama'] ?></td>
                                 <td>-</td>
                                 <td>
                                     <div class="btn-group dropdown text-center">
@@ -89,6 +104,7 @@
                                 <td>
                                     <?= time_ago($file['updated_at']); ?>
                                 </td>
+                                <td><?= $file['jenis_nama']; ?></td>
                                 <td>
                                     <?php
                                     if (is_file(FCPATH . 'files/' . $file['file'])) {
@@ -115,7 +131,7 @@
 
                     <?php if (!$folder && !$files) : ?>
                         <tr>
-                            <td colspan="5" class="text-center">Tidak ada item</td>
+                            <td colspan="6" class="text-center">Tidak ada item</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -137,6 +153,19 @@
             <form id="folder_form" action="<?= base_url() ?>/docs/save" method="post">
                 <input type="hidden" name="folder_id" id="folder_id" val="">
                 <div class="modal-body">
+                    <div class="form-group">
+                        <label for="kategori_id">Kategori</label>
+                        <select name="kategori_id" id="kategori_id" class="form-control <?= $validation->hasError('kategori_id') ? 'is-invalid' : '' ?>">
+                            <option value="0">None</option>
+                            <?php foreach ($kategori as $k) : ?>
+                                <option value="<?= $k['kategori_id'] ?>"><?= $k['kategori_nama']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('kategori_id'); ?>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label for="folder_name">Nama Folder</label>
                         <input type="text" id="folder_name" name="folder_name" class="form-control <?= $validation->hasError('folder_name') ? 'is-invalid' : '' ?>" placeholder="Masukan Nama Folder...">

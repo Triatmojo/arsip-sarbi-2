@@ -8,6 +8,8 @@ class Docs extends BaseController
     {
         $this->docsModel = new \App\Models\DocsModel();
         $this->fileModel = new \App\Models\FileModel();
+        $this->kategoriModel = new \App\Models\KategoriModel();
+        $this->jenisModel = new \App\Models\jenisModel();
         $this->validation = \Config\Services::validation();
         $this->mimeType = [
             'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
@@ -26,11 +28,15 @@ class Docs extends BaseController
             'title' => 'Home',
             'folder' => $this->docsModel->getParent($id),
             'files' => $this->fileModel->getFilebyFolder($id),
+            'kategori' => $this->kategoriModel->get(),
             'folder_parent' => $id,
+            'this_folder' => $this->docsModel->getDoc($id),
             'validation' => $this->validation
         ];
 
         if ($id != 0) {
+            $data['this_folder'] = $this->docsModel->getDoc($id);
+            $data['jenis'] = $this->jenisModel->where(['kategori_id' => $data['this_folder']['kategori_id']])->findAll();
             $data['prev_folder'] = $this->docsModel->getParentIdByFolder($id);
         }
 
@@ -118,11 +124,5 @@ class Docs extends BaseController
 
         $this->fileModel->delete($id);
         return redirect()->to('/docs' . '/' . $folder);
-    }
-
-    public function table()
-    {
-        $data = ['title' => 'Table'];
-        return view('table', $data);
     }
 }
