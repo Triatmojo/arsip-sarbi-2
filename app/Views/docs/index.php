@@ -57,6 +57,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
                         </tr>
                     <?php endif; ?>
                     <?php if ($folder) : ?>
