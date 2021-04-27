@@ -28,7 +28,7 @@
         <nav class="main-header navbar navbar-expand-md navbar-dark bg-lightblue navbar-white">
             <div class="container">
                 <a href="<?= base_url() ?>/home" class="navbar-brand">
-                    <img src="<?= base_url() ?>/img/logo_besar.png" alt="SIC Logo" class="brand-image" style="opacity: .8">
+                    <img src="<?= base_url() ?>/img/logo_navbar.png" alt="SIC Logo" class="brand-image" style="opacity: .8">
                     <!-- <span class="brand-text font-weight-light">Sarbi-sic</span> -->
                 </a>
 

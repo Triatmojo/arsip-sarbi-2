@@ -41,7 +41,6 @@ $RECYCLE.BIN/
 #-------------------------
 # These should never be under version control,
 # as it poses a security risk
-.env
 .vagrant
 Vagrantfile
 
@@ -83,7 +82,6 @@ phpunit
 #-------------------------
 # Composer
 #-------------------------
-# vendor/
 
 #-------------------------
 # IDE / Development Files
@@ -103,10 +101,6 @@ _modules/*
 nbproject/
 build/
 nbbuild/
-<<<<<<< HEAD
-=======
-# dist/
->>>>>>> trii
 nbdist/
 nbactions.xml
 nb-configuration.xml
