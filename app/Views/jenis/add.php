@@ -21,13 +21,6 @@
                     <?= form_open('jenis/save'); ?>
                     <?= csrf_field(); ?>
                     <div class="form-group">
-                        <label for="jenis_nama">Nama Jenis</label>
-                        <input type="text" name="jenis_nama" id="jenis_nama" class="form-control <?= $validation->hasError('jenis_nama') ? 'is-invalid' : '' ?>" placeholder="Enter jenis file...">
-                        <div class="invalid-feedback">
-                            <?= $validation->getError('jenis_nama'); ?>
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label for="kategori_id">Kategori</label>
                         <select name="kategori_id" id="kategori_id" class="form-control <?= $validation->hasError('kategori_id') ? 'is-invalid' : '' ?>">
                             <option value="" selected>-- Pilih Kategori --</option>
@@ -37,6 +30,13 @@
                         </select>
                         <div class="invalid-feedback">
                             <?= $validation->getError('kategori_id'); ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="jenis_nama">Nama Jenis</label>
+                        <input type="text" name="jenis_nama" id="jenis_nama" class="form-control <?= $validation->hasError('jenis_nama') ? 'is-invalid' : '' ?>" placeholder="Enter jenis file...">
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('jenis_nama'); ?>
                         </div>
                     </div>
                     <div class="text-right">

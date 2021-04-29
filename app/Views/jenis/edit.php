@@ -22,13 +22,6 @@
                     <?= csrf_field(); ?>
                     <input type="hidden" name="jenis_id" value="<?= $jenis['jenis_id']; ?>">
                     <div class="form-group">
-                        <label for="jenis_nama">Nama Jenis File</label>
-                        <input type="text" value="<?= $jenis['jenis_nama'] ?>" name="jenis_nama" id="jenis_nama" class="form-control <?= $validation->hasError('jenis_nama') ? 'is-invalid' : '' ?>" placeholder="Enter jenis file...">
-                        <div class="invalid-feedback">
-                            <?= $validation->getError('jenis_nama'); ?>
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label for="kategori_id">Kategori</label>
                         <select name="kategori_id" id="kategori_id" class="form-control <?= $validation->hasError('kategori_id') ? 'is-invalid' : '' ?>">
                             <?php foreach ($kategori as $k) : ?>
@@ -37,6 +30,13 @@
                         </select>
                         <div class="invalid-feedback">
                             <?= $validation->getError('kategori_id'); ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="jenis_nama">Nama Jenis File</label>
+                        <input type="text" value="<?= $jenis['jenis_nama'] ?>" name="jenis_nama" id="jenis_nama" class="form-control <?= $validation->hasError('jenis_nama') ? 'is-invalid' : '' ?>" placeholder="Enter jenis file...">
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('jenis_nama'); ?>
                         </div>
                     </div>
                     <div class="text-right">
