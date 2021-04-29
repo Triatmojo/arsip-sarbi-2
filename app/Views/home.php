@@ -13,7 +13,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="text-right">
-                            <img src="<?= base_url() ?>/ilustrator_1.png" class="icon w-50" alt="ilustrator.png">
+                            <img src="<?= base_url() ?>/ilustrator_2.png" class="icon w-50" alt="ilustrator.png">
                         </div>
                     </div>
                 </div>

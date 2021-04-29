@@ -31,7 +31,6 @@
                     <img src="<?= base_url() ?>/img/logo_navbar.png" alt="SIC Logo" class="brand-image" style="opacity: .8">
                     <!-- <span class="brand-text font-weight-light">Sarbi-sic</span> -->
                 </a>
-
                 <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -42,6 +41,7 @@
                         <li class="nav-item">
                             <a href="<?= base_url('home'); ?>" class="nav-link <?= activeMenu('home'); ?>">Home</a>
                         </li>
+
                         <li class="nav-item">
                             <a href="<?= base_url() ?>/docs" class="nav-link <?= activeMenu('docs'); ?>">Files</a>
                         </li>
@@ -52,18 +52,44 @@
                             <a href="#" class="nav-link">Laporan</a>
                         </li>
                         <?php if (is_admin()) : ?>
+                            <li class="nav-item dropdown">
+                                <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Settings</a>
+                                <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                                    <li>
+                                        <a href="<?= base_url() ?>/kategori" class="dropdown-item">
+                                            Kategori
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= base_url() ?>/jenis" class="dropdown-item">
+                                            Jenis
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= base_url() ?>/users" class="dropdown-item">
+                                            User Management
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                             <li class="nav-item">
-                                <a href="<?= base_url() ?>/users" class="nav-link <?= activeMenu('users'); ?>">User
-                                    Management
-                                </a>
+
                             </li>
                         <?php endif; ?>
-
                         <li class="nav-item dropdown">
-                            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Logout</a>
+                            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="nav-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M7 6a7.75 7.75 0 1 0 10 0" />
+                                    <line x1="12" y1="4" x2="12" y2="12" />
+                                </svg>
+                            </a>
                             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                                <li><a href="#" class="dropdown-item">Edit Profile</a></li>
-                                <li><a href="/auth/logout" class="dropdown-item">Sign-out</a></li>
+                                <li>
+                                    <a href="/auth/logout" class="dropdown-item">
+                                        <i class="fa fa-sign-out-alt fa-fw mr-2"></i>Sign-out
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     </ul>

@@ -93,6 +93,16 @@ class Users extends BaseController
         return redirect()->to('/users');
     }
 
+    public function multi_delete()
+    {
+        $check = $this->request->getVar('checked', FILTER_SANITIZE_STRING);
+
+        foreach ($check as $id) {
+            $this->userModel->delete($id);
+        }
+        return redirect()->to('/users');
+    }
+
     public function delete($id)
     {
         $this->userModel->delete($id);

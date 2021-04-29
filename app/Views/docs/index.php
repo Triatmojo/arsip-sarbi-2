@@ -1,143 +1,140 @@
 <?= $this->extend('layout/karyawan'); ?>
 
 <?= $this->section('content'); ?>
-<div class="container">
-    <div class="card">
-        <div class="card-header">
-            <div class="row">
-                <div class="col">
-                    <?php if ($folder_parent != 0) : ?>
-                        <?php if ($this_folder['folder_id'] != 0) : ?>
-                            <h3 class="card-title align-self-center">
-                                <?= $this_folder['folder_name']; ?>
-                            </h3>
-                            <br>
-                            <?php if ($this_folder['kategori_id'] != 0) : ?>
-                                <span class="badge badge-primary"><?= $this_folder['kategori_nama']; ?></span>
-                            <?php endif; ?>
-
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col mt-1">
+                <?php if ($folder_parent != 0) : ?>
+                    <?php if ($this_folder['folder_id'] != 0) : ?>
+                        <h3 class="card-title">
+                            <?= $this_folder['folder_name']; ?>
+                        </h3>
+                        <br>
+                        <?php if ($this_folder['kategori_id'] != 0) : ?>
+                            <span class="badge badge-primary"><?= $this_folder['kategori_nama']; ?></span>
                         <?php endif; ?>
+
                     <?php endif; ?>
-                </div>
-                <div class="col text-right">
-                    <a href="#" class="btn btn-primary tambahFolder" data-toggle="modal" data-target="#formModal">
-                        <i class="fas fa-plus fa-fw"></i> Folder Baru
-                    </a>
-                    <a href="#" class="btn btn-secondary" data-toggle="modal" data-target="#fileModal">
-                        <i class="fas fa-upload fa-fw"></i> Upload File
-                    </a>
-                </div>
+                <?php endif; ?>
+            </div>
+            <div class="col text-right">
+                <a href="#" class="btn btn-primary tambahFolder" data-toggle="modal" data-target="#formModal">
+                    <i class="fas fa-plus fa-fw"></i> Folder Baru
+                </a>
+                <a href="#" class="btn btn-secondary" data-toggle="modal" data-target="#fileModal">
+                    <i class="fas fa-upload fa-fw"></i> Upload File
+                </a>
             </div>
         </div>
-        <div class="card-body card-outline-left p-0">
-            <table id="browse" class="table table-hover table-hover table-sm">
-                <thead class="text-secondary">
+    </div>
+    <div class="card-body card-outline-left p-0">
+        <table id="browse" class="table table-hover table-hover table-sm">
+            <thead class="text-secondary">
+                <tr>
+                    <th class="text-center" width="20">
+                        <i class="fa fa-fw fa-file text-secondary"></i>
+                    </th>
+                    <th>Nama</th>
+                    <th>Updated</th>
+                    <th>Jenis/kategori</th>
+                    <th>Size</th>
+                    <th>Opsi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if ($folder_parent != 0) : ?>
                     <tr>
-                        <th class="text-center" width="20">
-                            <i class="fa fa-fw fa-file text-secondary"></i>
-                        </th>
-                        <th>Nama</th>
-                        <th>Updated</th>
-                        <th>Jenis/kategori</th>
-                        <th>Size</th>
-                        <th>Opsi</th>
+                        <td>
+                            <i class="fa fa-arrow-left text-secondary"></i>
+                        </td>
+                        <td>
+                            <a href="<?= base_url('docs') . '/' . $prev_folder; ?>">
+                                Kembali ...
+                            </a>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
-                </thead>
-                <tbody>
-                    <?php if ($folder_parent != 0) : ?>
+                <?php endif; ?>
+                <?php if ($folder) : ?>
+                    <?php foreach ($folder as $row) : ?>
                         <tr>
-                            <td>
-                                <i class="fa fa-arrow-left text-secondary"></i>
+                            <td class="text-center">
+                                <i class="fas fa-fw fa-folder text-secondary"></i>
                             </td>
-                            <td>
-                                <a href="<?= base_url('docs') . '/' . $prev_folder; ?>">
-                                    Kembali ...
+                            <td class="text-secondary">
+                                <a class="list-item" href="<?= base_url('docs/' . $row['folder_id']); ?>">
+                                    <?= $row['folder_name']; ?>
                                 </a>
                             </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>
+                                <?= time_ago($row['updated_at']); ?>
+                            </td>
+                            <td><?= $row['kategori_nama'] ?></td>
+                            <td>-</td>
+                            <td>
+                                <div class="btn-group dropdown text-center">
+                                    <button type="button" class="btn btn-sm btn-link text-center" data-toggle="dropdown">
+                                        <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <button data-id="<?= $row['folder_id'] ?>" data-nama="<?= $row['folder_name']; ?>" type="button" class="dropdown-item btnEditFolder">Rename</button>
+                                        <a href="<?= base_url() ?>/docs/deleteFolder/<?= $row['folder_id'] ?>" class="dropdown-item" onclick="return confirm('Yakin dihapus?')">Hapus</a>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
-                    <?php endif; ?>
-                    <?php if ($folder) : ?>
-                        <?php foreach ($folder as $row) : ?>
-                            <tr>
-                                <td class="text-center">
-                                    <i class="fas fa-fw fa-folder text-secondary"></i>
-                                </td>
-                                <td class="text-secondary">
-                                    <a class="list-item" href="<?= base_url('docs/' . $row['folder_id']); ?>">
-                                        <?= $row['folder_name']; ?>
-                                    </a>
-                                </td>
-                                <td>
-                                    <?= time_ago($row['updated_at']); ?>
-                                </td>
-                                <td><?= $row['kategori_nama'] ?></td>
-                                <td>-</td>
-                                <td>
-                                    <div class="btn-group dropdown text-center">
-                                        <button type="button" class="btn btn-sm btn-link text-center" data-toggle="dropdown">
-                                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <button data-id="<?= $row['folder_id'] ?>" data-nama="<?= $row['folder_name']; ?>" type="button" class="dropdown-item btnEditFolder">Rename</button>
-                                            <a href="<?= base_url() ?>/docs/deleteFolder/<?= $row['folder_id'] ?>" class="dropdown-item" onclick="return confirm('Yakin dihapus?')">Hapus</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-
-                    <?php if ($files) : ?>
-                        <?php foreach ($files as $file) : ?>
-                            <tr>
-                                <td class="text-center">
-                                    <i class="fas fa-fw fa-file text-secondary"></i>
-                                </td>
-                                <td>
-                                    <a href="<?= base_url() ?>/files/<?= $file['file']; ?>" target="_blank">
-                                        <?= $file['nama_file']; ?>
-                                    </a>
-                                </td>
-                                <td>
-                                    <?= time_ago($file['updated_at']); ?>
-                                </td>
-                                <td><?= $file['jenis_nama']; ?></td>
-                                <td>
-                                    <?php
-                                    if (is_file(FCPATH . 'files/' . $file['file'])) {
-                                        echo smarty_filesize(filesize(FCPATH . 'files/' . $file['file']));
-                                    } else {
-                                        echo "unknown";
-                                    }
-                                    ?>
-                                </td>
-                                <td>
-                                    <div class="btn-group dropdown">
-                                        <button type="button" class="btn btn-sm btn-link" data-toggle="dropdown">
-                                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <button type="button" class="dropdown-item btn-rename-file" data-id="<?= $file['file_id'] ?>" data-nama="<?= $file['nama_file'] ?>" data-folder="<?= $file['folder_id'] ?>">Rename</button>
-                                            <a href="<?= base_url() ?>/docs/deleteFile/<?= $file['file_id'] ?>" class="dropdown-item" onclick="return confirm('Yakin dihapus?')">Hapus</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-
-                    <?php if (!$folder && !$files) : ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+                <?php if ($files) : ?>
+                    <?php foreach ($files as $file) : ?>
                         <tr>
-                            <td colspan="6" class="text-center">Tidak ada item</td>
+                            <td class="text-center">
+                                <i class="fas fa-fw fa-file text-secondary"></i>
+                            </td>
+                            <td>
+                                <a href="<?= base_url() ?>/files/<?= $file['file']; ?>" target="_blank">
+                                    <?= $file['nama_file']; ?>
+                                </a>
+                            </td>
+                            <td>
+                                <?= time_ago($file['updated_at']); ?>
+                            </td>
+                            <td><?= $file['jenis_nama']; ?></td>
+                            <td>
+                                <?php
+                                if (is_file(FCPATH . 'files/' . $file['file'])) {
+                                    echo smarty_filesize(filesize(FCPATH . 'files/' . $file['file']));
+                                } else {
+                                    echo "unknown";
+                                }
+                                ?>
+                            </td>
+                            <td>
+                                <div class="btn-group dropdown">
+                                    <button type="button" class="btn btn-sm btn-link" data-toggle="dropdown">
+                                        <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <button type="button" class="dropdown-item btn-rename-file" data-id="<?= $file['file_id'] ?>" data-nama="<?= $file['nama_file'] ?>" data-folder="<?= $file['folder_id'] ?>">Rename</button>
+                                        <a href="<?= base_url() ?>/docs/deleteFile/<?= $file['file_id'] ?>" class="dropdown-item" onclick="return confirm('Yakin dihapus?')">Hapus</a>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+
+                <?php if (!$folder && !$files) : ?>
+                    <tr>
+                        <td colspan="6" class="text-center">Tidak ada item</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
     </div>
 </div>
 
@@ -166,7 +163,6 @@
                             <?= $validation->getError('kategori_id'); ?>
                         </div>
                     </div>
-
                     <div class="form-group">
                         <label for="folder_name">Nama Folder</label>
                         <input type="text" id="folder_name" name="folder_name" class="form-control <?= $validation->hasError('folder_name') ? 'is-invalid' : '' ?>" placeholder="Masukan Nama Folder...">
@@ -198,6 +194,7 @@
         let folder_id = $('#folder_id');
         let folder_name = $('#folder_name');
 
+
         modal.modal('show');
 
         // Edit Modal
@@ -207,10 +204,10 @@
         folder_id.val(id);
         folder_name.val(name);
 
+
         // Tambah Modal
         modal.on('hidden.bs.modal', function() {
             modal.find('.modal-title').text('Buat Folder');
-
             folder_id.val('');
             folder_name.val('');
         });
