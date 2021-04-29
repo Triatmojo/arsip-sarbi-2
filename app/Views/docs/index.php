@@ -25,6 +25,13 @@
                 <a href="#" class="btn btn-secondary" data-toggle="modal" data-target="#fileModal">
                     <i class="fas fa-upload fa-fw"></i> Upload File
                 </a>
+                <?php if ($folder_parent != 0) : ?>
+                    <?php if ($this_folder['kategori_id'] != 0) : ?>
+                        <a href="<?= base_url('docs/upload_kategori/'.$this_folder['folder_id']); ?>" class="btn btn-success">
+                            <i class="fas fa-fw fa-users fa-fw"></i> Create Form
+                        </a>
+                    <?php endif; ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>

@@ -97,7 +97,8 @@ class Docs extends BaseController
             return view('docs/errors');
         }
 
-        return redirect()->to('/docs' . '/' . $data['folder_id']);
+        // return redirect()->to('/docs' . '/' . $data['folder_id']);
+        return redirect()->to($_SERVER['HTTP_REFERER']);
     }
 
     public function renameFile()
@@ -121,5 +122,30 @@ class Docs extends BaseController
 
         $this->fileModel->delete($id);
         return redirect()->to('/docs' . '/' . $folder);
+    }
+
+    public function upload_kategori($id)
+    {
+        $folder = $this->docsModel->where(['folder_id'=>$id])->first();
+        $parent = $this->docsModel->where(['folder_id'=>$folder['folder_parent']])->first();
+
+        $jenis = $this->jenisModel->where(['kategori_id'=>$folder['kategori_id']])->findAll();
+        
+        // Cek File yang sudah terupload
+        $terupload = $this->fileModel->where(['folder_id'=>$folder['folder_id']])->findAll();
+        $jnsupload = [];
+        foreach ($terupload as $gt) {
+            $jnsupload[] = $gt['jenis_id'];
+        }
+
+        $data = [
+            'title'     => $parent['folder_name'].' / '.$folder['folder_name'],
+            'folder'    => $folder,
+            'jenis'     => $jenis,
+            'jnsupload' => $jnsupload,
+            'terupload' =>$terupload,
+        ];
+
+        return view('docs/upload_kategori', $data);
     }
 }

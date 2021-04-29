@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 26, 2021 at 04:42 PM
+-- Generation Time: Apr 29, 2021 at 07:48 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.3.27
 
@@ -30,13 +30,23 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `file` (
   `file_id` bigint(20) NOT NULL,
-  `folder_id` bigint(20) NOT NULL,
   `nama_file` varchar(255) NOT NULL,
+  `folder_id` bigint(20) NOT NULL,
   `jenis_id` int(11) NOT NULL DEFAULT '0',
   `file` varchar(255) NOT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `file`
+--
+
+INSERT INTO `file` (`file_id`, `nama_file`, `folder_id`, `jenis_id`, `file`, `user_id`, `created_at`, `updated_at`) VALUES
+(3, 'alamkoding_logo2', 41, 2, '1619679781_ddbd53df87b65a2b914d.png', NULL, '2021-04-29 14:03:01', '2021-04-29 14:03:01'),
+(4, 'asdasdasd', 41, 6, '1619680102_424c373d56d6e81a9356.png', NULL, '2021-04-29 14:08:22', '2021-04-29 14:08:22'),
+(5, 'asdasda', 41, 8, '1619680777_0ac6a384c86e461d898e.png', NULL, '2021-04-29 14:19:37', '2021-04-29 14:19:37');
 
 -- --------------------------------------------------------
 
@@ -49,7 +59,7 @@ CREATE TABLE `folder` (
   `folder_name` varchar(255) NOT NULL,
   `folder_parent` bigint(20) NOT NULL,
   `kategori_id` int(11) NOT NULL DEFAULT '0',
-  `jenis_akses` enum('private','public','user') NOT NULL,
+  `user_id` bigint(20) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -58,22 +68,21 @@ CREATE TABLE `folder` (
 -- Dumping data for table `folder`
 --
 
-INSERT INTO `folder` (`folder_id`, `folder_name`, `folder_parent`, `kategori_id`, `jenis_akses`, `created_at`, `updated_at`) VALUES
-(1, 'Legalitas', 0, 0, 'private', '2021-04-18 11:08:33', '2021-04-18 11:08:33'),
-(2, 'Sistem Mutu', 0, 0, 'private', '2021-04-18 11:08:33', '2021-04-18 11:08:33'),
-(3, 'Klien', 0, 0, 'private', '2021-04-18 11:08:33', '2021-04-18 11:08:33'),
-(5, 'ISPO', 2, 0, 'private', '2021-04-18 11:08:33', '2021-04-18 11:08:33'),
-(6, 'VLK', 2, 0, 'private', '2021-04-18 11:08:33', '2021-04-18 11:08:33'),
-(7, 'PPIUP', 2, 0, 'private', '2021-04-18 11:08:33', '2021-04-18 11:08:33'),
-(8, 'PT.Asik', 20, 0, 'private', '2021-04-18 11:08:33', '2021-04-18 11:08:33'),
-(9, 'PT. Qu', 20, 0, 'private', '2021-04-18 11:08:33', '2021-04-18 11:08:33'),
-(20, 'PHPL', 3, 0, 'private', '2021-04-18 11:08:33', '2021-04-18 11:08:33'),
-(38, 'PHPL', 2, 0, 'private', '2021-04-26 22:55:10', '2021-04-26 22:55:10'),
-(39, 'VLK', 3, 0, 'private', '2021-04-26 22:56:04', '2021-04-26 22:56:04'),
-(40, 'PT. Bumimas Arwana', 20, 0, 'private', '2021-04-26 23:10:48', '2021-04-26 23:23:55'),
-(41, 'Penilaian Awal', 40, 1, 'private', '2021-04-26 23:24:11', '2021-04-26 23:24:11'),
-(42, 'Penilikan I', 40, 2, 'private', '2021-04-26 23:25:12', '2021-04-26 23:25:12'),
-(43, 'Pencabutan', 40, 5, 'private', '2021-04-26 23:38:28', '2021-04-26 23:38:28');
+INSERT INTO `folder` (`folder_id`, `folder_name`, `folder_parent`, `kategori_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'Legalitas', 0, 0, 0, '2021-04-18 11:08:33', '2021-04-18 11:08:33'),
+(2, 'Sistem Mutu', 0, 0, 0, '2021-04-18 11:08:33', '2021-04-18 11:08:33'),
+(3, 'Klien', 0, 0, 0, '2021-04-18 11:08:33', '2021-04-18 11:08:33'),
+(5, 'ISPO', 2, 0, 0, '2021-04-18 11:08:33', '2021-04-18 11:08:33'),
+(6, 'VLK', 2, 0, 0, '2021-04-18 11:08:33', '2021-04-18 11:08:33'),
+(7, 'PPIUP', 2, 0, 0, '2021-04-18 11:08:33', '2021-04-18 11:08:33'),
+(20, 'PHPL', 3, 0, 0, '2021-04-18 11:08:33', '2021-04-18 11:08:33'),
+(38, 'PHPL', 2, 0, 0, '2021-04-26 22:55:10', '2021-04-26 22:55:10'),
+(39, 'VLK', 3, 0, 0, '2021-04-26 22:56:04', '2021-04-26 22:56:04'),
+(40, 'PT. Bumimas Arwana', 20, 0, 0, '2021-04-26 23:10:48', '2021-04-26 23:23:55'),
+(41, 'Penilaian Awal', 40, 1, 0, '2021-04-26 23:24:11', '2021-04-26 23:24:11'),
+(42, 'Penilikan I', 40, 2, 0, '2021-04-26 23:25:12', '2021-04-26 23:25:12'),
+(43, 'Pencabutan', 40, 5, 0, '2021-04-26 23:38:28', '2021-04-26 23:38:28'),
+(45, 'PT. SatriaFU', 20, 0, 0, '2021-04-29 12:43:34', '2021-04-29 12:43:34');
 
 -- --------------------------------------------------------
 
@@ -210,8 +219,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `nama_lengkap`, `email`, `no_telp`, `username`, `password`, `image`, `role`, `created_at`, `updated_at`) VALUES
-(1, 'Administrator', 'admin@gmail.comm', '08979787876', 'admin', '$2y$10$9lkfQHKfYS3dsGj0CdkdjOL0gouOtFBf2Ic.P18axkDdzFgzED2Uu', '', 'admin', '2021-04-09 21:29:08', '2021-04-11 01:10:55'),
-(2, 'Ghifari Arfan', 'user@gmail.com', '0897768216389', 'user', '$2y$10$Y2z5NWK/rNxe0EVzXp/GwusZYXSCJCjEflz7ZTmqXqmMYalJjET2e', '', 'karyawan', '2021-04-11 01:11:51', '2021-04-12 03:02:01');
+(1, 'Administrator', 'admin@gmail.comm', '08979787876', 'admin', '$2y$10$6fP2J9dfpTU2KoV06aGiZ.QG11Xq9NcUnuayK0UflrCM9gS55z3bu', '1619674369_fb7b4539b043322a1c48.png', 'admin', '2021-04-09 21:29:08', '2021-04-29 12:32:49'),
+(2, 'User', 'user@gmail.com', '0897768216389', 'user', '$2y$10$6fP2J9dfpTU2KoV06aGiZ.QG11Xq9NcUnuayK0UflrCM9gS55z3bu', '', 'karyawan', '2021-04-11 01:11:51', '2021-04-12 03:02:01');
 
 --
 -- Indexes for dumped tables
@@ -261,13 +270,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `file`
 --
 ALTER TABLE `file`
-  MODIFY `file_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `file_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `folder`
 --
 ALTER TABLE `folder`
-  MODIFY `folder_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `folder_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `folder_access`
