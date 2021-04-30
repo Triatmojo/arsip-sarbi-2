@@ -72,6 +72,10 @@ class Filters extends BaseConfig
 				'profile/*',
 				'users',
 				'users/*',
+				'jenis/',
+				'jenis/*',
+				'kategori/',
+				'kategori/*',
 			]
 		]
 	];
