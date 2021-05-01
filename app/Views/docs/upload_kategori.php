@@ -12,8 +12,8 @@
                 <tr>
                     <th>No. </th>
                     <th>Dokumen yang harus diupload</th>
-                    <th>File</th>
-                    <th>Aksi</th>
+                    <th class="text-center">File</th>
+                    <th class="text-center">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,12 +41,18 @@
                             </td>
                         <?= form_close(); ?>
                         <?php else: ?>
-                        <td class="align-middle text-right">
-                            nama_file.pdf
-                        </td>
-                        <td class="text-center">
-                            <a href="#" class="btn btn-danger"><i class="fa fa-times"></i></a>
-                        </td>
+                        <?php foreach ($terupload as $t) : ?>
+                            <?php if ($item['jenis_id'] == $t['jenis_id']): ?>
+                                <td class="align-middle text-center">
+                                    <?= $t['nama_file']; ?>
+                                </td>
+                                <td class="text-center">
+                                    <button onclick="location.href= '<?= base_url(); ?>/docs/deleteFile/<?=$t['file_id']?>'" type="button" class="btn btn-danger">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </td>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
                     <?php endif; ?>
                 </tr>
                 <?php endforeach; ?>

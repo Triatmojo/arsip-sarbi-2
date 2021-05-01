@@ -82,11 +82,12 @@ class Docs extends BaseController
                 $data = $this->request->getVar(null, FILTER_SANITIZE_STRING);
                 $data['file'] = $fileDoc;
                 
-                $nmFile = explode('.', $fileDoc->getClientName());
-                array_pop($nmFile);
-                $realFile = implode(' ', $nmFile);
+                // $nmFile = explode('.', $fileDoc->getClientName());
+                // array_pop($nmFile);
+                // $realFile = implode(' ', $nmFile);
                 
-                $data['nama_file'] = $realFile;
+                // $data['nama_file'] = $realFile;
+                $data['nama_file'] = $fileDoc->getClientName();
                 $data['folder_id'] = $data['folder_id'];
                 $data['file'] = $fileName;
 
@@ -121,7 +122,8 @@ class Docs extends BaseController
         }
 
         $this->fileModel->delete($id);
-        return redirect()->to('/docs' . '/' . $folder);
+        // return redirect()->to('/docs' . '/' . $folder);
+        return redirect()->to($_SERVER['HTTP_REFERER']);
     }
 
     public function upload_kategori($id)
@@ -143,7 +145,7 @@ class Docs extends BaseController
             'folder'    => $folder,
             'jenis'     => $jenis,
             'jnsupload' => $jnsupload,
-            'terupload' =>$terupload,
+            'terupload' => $terupload,
         ];
 
         return view('docs/upload_kategori', $data);
