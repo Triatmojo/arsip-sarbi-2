@@ -39,6 +39,17 @@
                             <?= $validation->getError('jenis_nama'); ?>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="mr-2">Wajib diisi?</label>
+                        <label>
+                            <input <?= selected('1', $jenis['is_required'], 'checked'); ?> checked type="radio" value="1" name="is_required">
+                            Ya
+                        </label>
+                        <label>
+                            <input <?= selected('0', $jenis['is_required'], 'checked'); ?> type="radio" value="0" name="is_required">
+                            Tidak
+                        </label>
+                    </div>
                     <div class="text-right">
                         <button type="submit" class="btn btn-info">Simpan</button>
                     </div>

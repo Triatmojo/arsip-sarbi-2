@@ -27,9 +27,9 @@
                 </a>
                 <?php if ($folder_parent != 0) : ?>
                     <?php if ($this_folder['kategori_id'] != 0) : ?>
-                        <a href="<?= base_url('docs/upload_kategori/'.$this_folder['folder_id']); ?>" class="btn btn-success">
+                        <button type="button" id="showFormUser" data-link="<?= base_url('docs/upload_kategori/'.$this_folder['folder_id']); ?>" class="btn btn-success">
                             <i class="fas fa-fw fa-users fa-fw"></i> Create Form
-                        </a>
+                        </button>
                     <?php endif; ?>
                 <?php endif; ?>
             </div>
@@ -190,6 +190,38 @@
 
 <?= $this->include('docs/fileModal'); ?>
 
+<?php if ($folder_parent != 0) : ?>
+<?php if ($this_folder['kategori_id'] != 0) : ?>
+    <div class="modal fade" id="modal-formUser" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-formUser">Kirim akses ke user</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="link">Link</label>
+                        <input type="text" readonly id="link" class="form-control" placeholder="link">
+                    </div>
+                    <div class="form-group">
+                        <label for="user_id">User</label>
+                        <select multiple name="user_id[]" id="user_id[]" class="custom-select">
+                            <option value="">Pilih User</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Share</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+<?php endif; ?>
+
 <?= $this->endSection(); ?>
 
 <?= $this->section('addons'); ?>
@@ -211,7 +243,6 @@
         folder_id.val(id);
         folder_name.val(name);
 
-
         // Tambah Modal
         modal.on('hidden.bs.modal', function() {
             modal.find('.modal-title').text('Buat Folder');
@@ -226,7 +257,7 @@
 
         let file_id = $('#renameFile #file_id');
         let file_name = $('#renameFile #nama_file');
-        let folder_id = $('#renameFile #folder_id');
+        let folder_id = $('#renameFile #folder_id_edit');
 
         modal.modal('show');
 
@@ -257,6 +288,11 @@
                 "dom": "<'row px-2 px-md-4 pt-2'<'col-md'f>>" +
                     "<'row'<'col-md-12'tr>>"
             });
+        });
+
+        $('#showFormUser').on('click', function() {
+            $('#modal-formUser').modal('show');
+            $('#link').val($(this).data('link'));
         });
 
         $('.tambahFolder').on('click', function() {

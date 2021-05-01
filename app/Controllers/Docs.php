@@ -105,7 +105,11 @@ class Docs extends BaseController
     public function renameFile()
     {
         $data = $this->request->getVar(null, FILTER_SANITIZE_STRING);
-        $data['folder_id'] = $data['folder_id'];
+        
+        // mencegah ambigu id input
+        $data['folder_id'] = $data['folder_id_edit'];
+        unset($data['folder_id_edit']);
+
         $this->fileModel->save($data);
 
         return redirect()->to('/docs' . '/'  . $data['folder_id']);
@@ -140,12 +144,25 @@ class Docs extends BaseController
             $jnsupload[] = $gt['jenis_id'];
         }
 
+        // Cek file belum diupload
+        $blmupload = [];
+        foreach ($jenis as $jns) {
+            // cek file yg harus diupload dan tidak
+            if ($jns['is_required']==1) {
+                // cekfile yg telah diupload
+                if (!in_array($jns['jenis_id'], $jnsupload)) {
+                    $blmupload[] = $jns;
+                }
+            }
+        }
+
         $data = [
             'title'     => $parent['folder_name'].' / '.$folder['folder_name'],
             'folder'    => $folder,
             'jenis'     => $jenis,
             'jnsupload' => $jnsupload,
             'terupload' => $terupload,
+            'blmupload' => $blmupload,
         ];
 
         return view('docs/upload_kategori', $data);
