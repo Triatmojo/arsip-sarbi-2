@@ -9,7 +9,9 @@ class Docs extends BaseController
         $this->docsModel = new \App\Models\DocsModel();
         $this->fileModel = new \App\Models\FileModel();
         $this->kategoriModel = new \App\Models\KategoriModel();
-        $this->jenisModel = new \App\Models\jenisModel();
+        $this->jenisModel = new \App\Models\JenisModel();
+        $this->userModel = new \App\Models\UserModel();
+        $this->akses = new \App\Models\folderaksesModel();
         $this->validation = \Config\Services::validation();
         $this->mimeType = [
             'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
@@ -166,5 +168,48 @@ class Docs extends BaseController
         ];
 
         return view('docs/upload_kategori', $data);
+    }
+
+    public function user_access($folder_id)
+    {
+        $data['title']  = "Access Folder";
+        $data['folder'] = $this->docsModel->getDoc($folder_id);
+        $data['link']   = base_url("docs/upload_kategori")."/".$folder_id;
+        $data['user']   = $this->userModel->where(['role'=>'karyawan'])->findAll();
+        
+        $shared = $this->akses->where(['folder_id'=>$folder_id])->findAll();
+        $data['shared'] = [];
+        foreach ($shared as $s) {
+            $data['shared'][] = $s['user_id'];
+        }
+
+        return view('docs/user_access', $data);
+    }
+
+    public function save_user_access()
+    {
+        $input = $this->request->getVar(null, FILTER_SANITIZE_STRING);
+
+        if (empty($input['user_id'])) {
+            return redirect()->to($_SERVER['HTTP_REFERER']);
+        }
+
+        foreach ($input['user_id'] as $userId) {
+            $data = [
+                'folder_id' => $input['folder_id'],
+                'user_id'   => $userId
+            ];
+
+            // delete before save to update
+            $shared = $this->akses->where(['folder_id'=>$data['folder_id'], 'user_id' => $data['user_id']])->findAll();
+            foreach ($shared as $s) {
+                $this->akses->delete($s['id']);
+            }
+
+            // save
+            $this->akses->save($data);
+        }
+
+        return redirect()->to('/docs/index/'.$input['folder_id']);
     }
 }
