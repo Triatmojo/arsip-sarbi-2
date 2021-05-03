@@ -48,6 +48,7 @@ class Users extends BaseController
 
         $input = $this->request->getVar(null, FILTER_SANITIZE_STRING);
         $input['password'] = password_hash($input['password'], PASSWORD_DEFAULT);
+        $input['image'] = 'default.png';
         unset($input['csrf_test_name']);
 
         $this->userModel->save($input);

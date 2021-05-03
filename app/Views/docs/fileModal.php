@@ -24,7 +24,6 @@
                             </div>
                         <?php endif; ?>
                     <?php endif; ?>
-
                     <div class="custom-file">
                         <input type="file" name="file" class="custom-file-input" id="file" accept=".zip,.ZIP,.rar,.RAR,.7z,.iso,application/octet-stream,application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
 text/plain, application/pdf, image/*">
@@ -54,12 +53,11 @@ text/plain, application/pdf, image/*">
             <?= form_open('docs/renameFile'); ?>
             <?= csrf_field(); ?>
             <input type="hidden" name="file_id" id="file_id">
-            <input type="hidden" name="folder_id" id="folder_id">
+            <input type="hidden" name="folder_id_edit" id="folder_id_edit">
             <div class="modal-body">
                 <div class="form-group">
                     <label for="nama_file">Nama File</label>
                     <input type="text" name="nama_file" id="nama_file" class="form-control" required>
-
                 </div>
             </div>
             <div class="modal-footer">

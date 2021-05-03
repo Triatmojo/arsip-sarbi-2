@@ -27,7 +27,7 @@
                 </a>
                 <?php if ($folder_parent != 0) : ?>
                     <?php if ($this_folder['kategori_id'] != 0) : ?>
-                        <a href="<?= base_url('docs/upload_kategori/'.$this_folder['folder_id']); ?>" class="btn btn-success">
+                        <a href="<?= base_url('docs/user_access/'.$this_folder['folder_id']); ?>" class="btn btn-success">
                             <i class="fas fa-fw fa-users fa-fw"></i> Create Form
                         </a>
                     <?php endif; ?>
@@ -211,7 +211,6 @@
         folder_id.val(id);
         folder_name.val(name);
 
-
         // Tambah Modal
         modal.on('hidden.bs.modal', function() {
             modal.find('.modal-title').text('Buat Folder');
@@ -226,7 +225,7 @@
 
         let file_id = $('#renameFile #file_id');
         let file_name = $('#renameFile #nama_file');
-        let folder_id = $('#renameFile #folder_id');
+        let folder_id = $('#renameFile #folder_id_edit');
 
         modal.modal('show');
 

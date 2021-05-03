@@ -10,7 +10,7 @@ class JenisModel extends Model
     protected $primaryKey = 'jenis_id';
     protected $useTimestamps = false;
 
-    protected $allowedFields = ['jenis_nama', 'kategori_id'];
+    protected $allowedFields = ['jenis_nama', 'kategori_id', 'is_required'];
 
     public function get($id = null)
     {

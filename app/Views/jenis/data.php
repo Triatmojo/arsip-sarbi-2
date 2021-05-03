@@ -22,6 +22,7 @@
                             <th>No.</th>
                             <th>Kategori</th>
                             <th>Jenis File</th>
+                            <th>Required</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -32,8 +33,11 @@
                             <tr>
                                 <td><input type="checkbox" name="checked[]" class="check" value="<?= $j['jenis_id'] ?>"></td>
                                 <td><?= $no++; ?></td>
-                                <td><?= $j['kategori_nama'] ?></td>
-                                <td><?= $j['jenis_nama'] ?></td>
+                                <td><?= $j['kategori_nama']; ?></td>
+                                <td><?= $j['jenis_nama']; ?></td>
+                                <td>
+                                    <?= $j['is_required'] == 1 ? "<span class='badge badge-success'>Yes</span>" : "<span class='badge badge-danger'>No</span>"; ?>
+                                </td>
                                 <td>
                                     <div class="btn-group dropdown">
                                         <button type="button" class="btn btn-white" data-toggle="dropdown">

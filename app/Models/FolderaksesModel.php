@@ -10,7 +10,7 @@ class FolderaksesModel extends Model
     protected $primaryKey = 'id';
     protected $useTimeStamps = false;
 
-    protected $allowedFields = ['folder_id', 'user_id', 'nama_lengkap', 'folder_name'];
+    protected $allowedFields = ['folder_id', 'user_id'];
 
     public function getFolderAkses($id = null)
     {
@@ -22,5 +22,12 @@ class FolderaksesModel extends Model
         }
 
         return $this->where('id', $id)->first();
+    }
+
+    public function getFolderShared($user_id)
+    {
+        $this->select('folder.folder_id,folder.folder_name,folder.updated_at,folder_access.user_id');
+        $this->join('folder', 'folder_id', 'left');
+        return $this->where('folder_access.user_id', $user_id)->findAll();
     }
 }

@@ -33,6 +33,11 @@ function activeMenu($menu = '')
     return $menu == $uri ? 'active' : '';
 }
 
+function selected($data1, $data2, $result = "selected")
+{
+    return $data1 == $data2 ? $result : "";
+}
+
 function userdata($data = null)
 {
     $user = new \App\Models\UserModel();
