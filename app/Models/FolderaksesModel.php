@@ -24,10 +24,21 @@ class FolderaksesModel extends Model
         return $this->where('id', $id)->first();
     }
 
-    public function getFolderShared($user_id)
+
+    public function getFolderShared($user_id, $parent_id = null)
     {
-        $this->select('folder.folder_id,folder.folder_name,folder.updated_at,folder_access.user_id');
+        if ($parent_id == null) {
+            $this->simpleQuery("SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+            $this->groupBy('folder.folder_parent');
+            $this->select('GROUP_CONCAT(folder.folder_name) as folder');
+        } else {
+            $this->select('folder.folder_name as folder');
+            $this->where('folder.folder_parent', $parent_id);
+        }
+
+        $this->select('folder.folder_id,parent.folder_name as parent,folder.folder_parent,folder.updated_at,folder_access.user_id');
         $this->join('folder', 'folder_id', 'left');
+        $this->join('folder as parent', 'folder.folder_parent=parent.folder_id', 'left');
         return $this->where('folder_access.user_id', $user_id)->findAll();
     }
 }

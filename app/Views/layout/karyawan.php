@@ -42,38 +42,39 @@
                         <li class="nav-item">
                             <a href="<?= base_url('home'); ?>" class="nav-link <?= activeMenu('home'); ?>">Home</a>
                         </li>
-
-                        <li class="nav-item">
-                            <a href="<?= base_url() ?>/docs" class="nav-link <?= activeMenu('docs'); ?>">Files</a>
-                        </li>
+                        <?php if (is_admin()) : ?>
+                            <li class="nav-item">
+                                <a href="<?= base_url() ?>/docs" class="nav-link <?= activeMenu('docs'); ?>">Files</a>
+                            </li>
+                        <?php endif; ?>
                         <li class="nav-item">
                             <a href="<?= base_url() ?>/profile" class="nav-link <?= activeMenu('profile'); ?>">Profile</a>
                         </li>
                         <?php if (is_admin()) : ?>
-                        <li class="nav-item dropdown">
-                            <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Settings</a>
-                            <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-                                <li>
-                                    <a href="<?= base_url() ?>/kategori" class="dropdown-item">
-                                        Kategori
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<?= base_url() ?>/jenis" class="dropdown-item">
-                                        Jenis
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<?= base_url() ?>/users" class="dropdown-item">
-                                        User Management
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <?php else: ?>
-                        <li class="nav-item">
-                            <a href="<?= base_url('myfolder'); ?>" class="nav-link">Folder Saya</a>
-                        </li>
+                            <li class="nav-item dropdown">
+                                <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Settings</a>
+                                <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                                    <li>
+                                        <a href="<?= base_url() ?>/kategori" class="dropdown-item">
+                                            Kategori
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= base_url() ?>/jenis" class="dropdown-item">
+                                            Jenis
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<?= base_url() ?>/users" class="dropdown-item">
+                                            User Management
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        <?php else : ?>
+                            <li class="nav-item">
+                                <a href="<?= base_url('myfolder'); ?>" class="nav-link">Folder Saya</a>
+                            </li>
                         <?php endif; ?>
                         <li class="nav-item dropdown">
                             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
@@ -115,13 +116,13 @@
                                 $menu = service('uri')->getSegment(1);
                                 if ($menu != 'home') :
                                     if ($menu) : ?>
-                                <li class="breadcrumb-item">
-                                    <a href="<?= base_url() ?>/<?= $menu ?>"><?= $menu; ?></a>
-                                </li>
-                                <?php endif; ?>
-                                <li class="breadcrumb-item">
-                                    <?= $title ?>
-                                </li>
+                                        <li class="breadcrumb-item">
+                                            <a href="<?= base_url() ?>/<?= $menu ?>"><?= $menu; ?></a>
+                                        </li>
+                                    <?php endif; ?>
+                                    <li class="breadcrumb-item">
+                                        <?= $title ?>
+                                    </li>
                                 <?php endif; ?>
                             </ol>
                         </div><!-- /.col -->
@@ -198,79 +199,81 @@
 
 
     <script type="text/javascript">
-    $(document).ready(function() {
-        var table = $('#datatable').DataTable({
-            processing: true,
-            severSide: true,
-            buttons: ['copy', 'csv', 'print', 'excel'],
-            dom: "<'row px-2 px-md-4 pt-2'<'col-md-3'l><'col-md-5 text-center'B><'col-md-4'f>>" +
-                "<'row'<'col-md-12'tr>>" +
-                "<'row px-2 px-md-4 py-3'<'col-md-5'i><'col-md-7'p>>",
-            columnDefs: [{
-                targets: -1,
-                orderable: false,
-                searchable: false
-            }]
-        });
+        $(document).ready(function() {
+            var table = $('#datatable').DataTable({
+                processing: true,
+                severSide: true,
+                buttons: ['copy', 'csv', 'print', 'excel'],
+                dom: "<'row px-2 px-md-4 pt-2'<'col-md-3'l><'col-md-5 text-center'B><'col-md-4'f>>" +
+                    "<'row'<'col-md-12'tr>>" +
+                    "<'row px-2 px-md-4 py-3'<'col-md-5'i><'col-md-7'p>>",
+                columnDefs: [{
+                    targets: -1,
+                    orderable: false,
+                    searchable: false
+                }]
+            });
 
-        table.buttons().container().appendTo('#dataTable_wrapper .col-md-5:eq(0)');
+            table.buttons().container().appendTo('#dataTable_wrapper .col-md-5:eq(0)');
 
-        var start = moment().subtract(29, 'days');
-        var end = moment();
+            var start = moment().subtract(29, 'days');
+            var end = moment();
 
-        function cb(start, end) {
-            $('#tangal').val(start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD'));
-        }
-
-        $('.select2').select2({theme:'bootstrap4'});
-
-        $('#tanggal').daterangepicker({
-            startDate: start,
-            endDate: end,
-            ranges: {
-                'Hari ini': [moment(), moment()],
-                'Kemarin': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                '7 hari terakhir': [moment().subtract(6, 'days'), moment()],
-                '30 hari terakhir': [moment().subtract(29, 'days'), moment()],
-                'Bulan ini': [moment().startOf('month'), moment().endOf('month')],
-                'Bulan lalu': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1,
-                    'month').endOf('month')],
-                'Tahun ini': [moment().startOf('year'), moment().endOf('year')],
-                'Tahun lalu': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1,
-                    'year').endOf('year')]
+            function cb(start, end) {
+                $('#tangal').val(start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD'));
             }
-        }, cb);
 
-        cb(start, end);
+            $('.select2').select2({
+                theme: 'bootstrap4'
+            });
 
-        $('[data-toggle="tooltip"]').tooltip();
+            $('#tanggal').daterangepicker({
+                startDate: start,
+                endDate: end,
+                ranges: {
+                    'Hari ini': [moment(), moment()],
+                    'Kemarin': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    '7 hari terakhir': [moment().subtract(6, 'days'), moment()],
+                    '30 hari terakhir': [moment().subtract(29, 'days'), moment()],
+                    'Bulan ini': [moment().startOf('month'), moment().endOf('month')],
+                    'Bulan lalu': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1,
+                        'month').endOf('month')],
+                    'Tahun ini': [moment().startOf('year'), moment().endOf('year')],
+                    'Tahun lalu': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1,
+                        'year').endOf('year')]
+                }
+            }, cb);
 
-        var table = $('.datatable').DataTable({
-            buttons: ['copy', 'csv', 'print', 'excel'],
-            dom: "<'row px-2 px-md-4 pt-2'<'col-md-3'l><'col-md-5 text-center'B><'col-md-4'f>>" +
-                "<'row'<'col-md-12'tr>>" +
-                "<'row px-2 px-md-4 py-3'<'col-md-5'i><'col-md-7'p>>",
-            lengthMenu: [
-                [5, 10, 25, 50, 100, -1],
-                [5, 10, 25, 50, 100, "All"]
-            ],
-            columnDefs: [{
-                targets: -1,
-                orderable: false,
-                searchable: false
-            }]
+            cb(start, end);
+
+            $('[data-toggle="tooltip"]').tooltip();
+
+            var table = $('.datatable').DataTable({
+                buttons: ['copy', 'csv', 'print', 'excel'],
+                dom: "<'row px-2 px-md-4 pt-2'<'col-md-3'l><'col-md-5 text-center'B><'col-md-4'f>>" +
+                    "<'row'<'col-md-12'tr>>" +
+                    "<'row px-2 px-md-4 py-3'<'col-md-5'i><'col-md-7'p>>",
+                lengthMenu: [
+                    [5, 10, 25, 50, 100, -1],
+                    [5, 10, 25, 50, 100, "All"]
+                ],
+                columnDefs: [{
+                    targets: -1,
+                    orderable: false,
+                    searchable: false
+                }]
+            });
+
+            table.buttons().container().appendTo('#dataTable_wrapper .col-md-5:eq(0)');
+
+            $('body .custom-file-input').on('change', function() {
+                let fileName = $(this).val().split('\\').pop();
+                $(this).next('.custom-file-label').addClass("selected").html(fileName);
+            });
+
+            // Memanggil fungsi toast pada helper 
+            <?= session()->getFlashdata('toast'); ?>
         });
-
-        table.buttons().container().appendTo('#dataTable_wrapper .col-md-5:eq(0)');
-
-        $('body .custom-file-input').on('change', function() {
-            let fileName = $(this).val().split('\\').pop();
-            $(this).next('.custom-file-label').addClass("selected").html(fileName);
-        });
-
-        // Memanggil fungsi toast pada helper 
-        <?= session()->getFlashdata('toast'); ?>
-    });
     </script>
 
     <?= $this->renderSection('addons'); ?>

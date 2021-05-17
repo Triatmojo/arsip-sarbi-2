@@ -17,14 +17,14 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-link"></i></div>
                     </div>
-                    <input type="text" readonly id="link" value="<?=$link?>" class="form-control">
+                    <input type="text" readonly id="link" value="<?= $link ?>" class="form-control">
                 </div>
                 <input type="hidden" name="folder_id" value="<?= $folder['folder_id']; ?>">
                 <div class="form-group mb-0">
                     <label for="user_id">Share to</label>
                     <select required multiple name="user_id[]" id="user_id[]" class="select2 form-control">
                         <?php foreach ($user as $u) : ?>
-                            <option value="<?= $u['user_id']; ?>" <?= in_array($u['user_id'], $shared) ? "selected":""; ?>><?= $u['nama_lengkap']; ?></option>
+                            <option value="<?= $u['user_id']; ?>" <?= in_array($u['user_id'], $shared) ? "selected" : ""; ?>><?= $u['nama_lengkap']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

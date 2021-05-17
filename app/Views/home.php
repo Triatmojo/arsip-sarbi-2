@@ -8,8 +8,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <h3 style="color:#303030; font-size:32px">Welcome <?= userdata('nama_lengkap'); ?></h3>
-                        <p class="font-weight-light" style="color: #535f6b"> You have 32 new notifications and 23 unread
-                            messages to reply</p>
+                        <p class="font-weight-light" style="color: #535f6b"> You have 32 new notifications</p>
                     </div>
                     <div class="col-lg-6">
                         <div class="text-right">

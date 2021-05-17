@@ -27,7 +27,7 @@
                 </a>
                 <?php if ($folder_parent != 0) : ?>
                     <?php if ($this_folder['kategori_id'] != 0) : ?>
-                        <a href="<?= base_url('docs/user_access/'.$this_folder['folder_id']); ?>" class="btn btn-success">
+                        <a href="<?= base_url('docs/user_access/' . $this_folder['folder_id']); ?>" class="btn btn-success">
                             <i class="fas fa-fw fa-users fa-fw"></i> Create Form
                         </a>
                     <?php endif; ?>
