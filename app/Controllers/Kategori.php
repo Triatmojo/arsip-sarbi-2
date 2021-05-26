@@ -43,13 +43,15 @@ class Kategori extends BaseController
 
         $input = $this->request->getVar(null, FILTER_SANITIZE_STRING);
         $this->kategoriModel->save($input);
+
+        setToast('success', "Data berhasil ditambah");
         return redirect()->to('/kategori');
     }
 
     public function edit($id)
     {
         $data = [
-            'title' => 'Add kategori',
+            'title' => 'Ubah kategori',
             'kategori' => $this->kategoriModel->get($id),
             'validation' => $this->validation
         ];
@@ -72,6 +74,7 @@ class Kategori extends BaseController
 
         $this->kategoriModel->save($input);
 
+        setToast('success', 'Data berhasil diubah')
         return redirect()->to('/kategori');
     }
 
@@ -82,12 +85,16 @@ class Kategori extends BaseController
         foreach ($check as $id) {
             $this->kategoriModel->delete($id);
         }
+
+        setToast('success', 'Data berhasil dihapus');
         return redirect()->to('/kategori');
     }
 
     public function delete($id)
     {
         $this->kategoriModel->delete($id);
+
+        setToast('success', 'Data berhasil dihapus');
         return redirect()->to('/kategori');
     }
 }

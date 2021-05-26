@@ -20,6 +20,10 @@
     <link rel="stylesheet" href="<?= base_url(); ?>/plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="<?= base_url(); ?>/plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="<?= base_url(); ?>/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="<?= base_url(); ?>/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+</head>
 </head>
 
 <body class="hold-transition layout-top-nav">
@@ -86,8 +90,11 @@
                             </a>
                             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                                 <li>
+                                    <a href="/auth/updatePassword" class="dropdown-item">
+                                        <i class="fa fa-exchange-alt fa-stack"></i> Reset Password
+                                    </a>
                                     <a href="/auth/logout" class="dropdown-item">
-                                        <i class="fa fa-sign-out-alt fa-fw mr-2"></i>Sign-out
+                                        <i class="fa fa-sign-out-alt fa-stack"></i>Sign-out
                                     </a>
                                 </li>
                             </ul>
@@ -110,7 +117,10 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb font-weight-light float-sm-right">
-                                <li class="breadcrumb-item"><a href="<?= base_url() ?>/home">Home</a>
+                                <li class="breadcrumb-item">
+                                    <a href="<?= base_url() ?>/home" class="text-dark">
+                                        <i class="fas fa-home"></i> Home
+                                    </a>
                                 </li>
                                 <?php
                                 $menu = service('uri')->getSegment(1);
@@ -164,13 +174,10 @@
 
     <!-- jQuery -->
     <script src="<?= base_url() ?>/plugins/jquery/jquery.min.js"></script>
-    <script src="<?= base_url(); ?>/plugins/moment/moment.min.js">
-    </script>
-    <script src="<?= base_url(); ?>/plugins/daterangepicker/daterangepicker.js">
-    </script>
+    <script src="<?= base_url(); ?>/plugins/moment/moment.min.js"></script>
+    <script src="<?= base_url(); ?>/plugins/daterangepicker/daterangepicker.js"></script>
     <!-- Bootstrap 4 -->
-    <script src="<?= base_url() ?>/plugins/bootstrap/js/bootstrap.bundle.min.js">
-    </script>
+    <script src="<?= base_url() ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="<?= base_url() ?>/dist/js/adminlte.min.js"></script>
     <!-- Datatables -->
@@ -196,7 +203,9 @@
     <script src="<?= base_url(); ?>/plugins/datatables-responsive/js/responsive.bootstrap4.min.js">
     </script>
     <script src="<?= base_url(); ?>/plugins/select2/js/select2.full.min.js"></script>
-
+    <!-- SweetAlert2 -->
+    <script src="<?= base_url(); ?>/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script scr="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -271,7 +280,17 @@
                 $(this).next('.custom-file-label').addClass("selected").html(fileName);
             });
 
-            // Memanggil fungsi toast pada helper 
+        });
+
+        $(function() {
+            // Swal toast 
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                timer: 5000
+            });
+
             <?= session()->getFlashdata('toast'); ?>
         });
     </script>

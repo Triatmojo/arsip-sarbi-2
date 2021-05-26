@@ -1,6 +1,5 @@
 <?= $this->extend('layout/karyawan'); ?>
 <?= $this->section('content'); ?>
-<?= d($folder); ?>
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">
@@ -8,12 +7,12 @@
         </h3>
     </div>
     <div class="card-body">
-        <table class="table w-100 table-sm" id="browse">
+        <table class="table w-100 table-sm table-hover" id="browse">
             <thead>
                 <tr>
                     <th>No</th>
                     <th>Nama Folder</th>
-                    <th>Dokumen</th>
+                    <th>Updated</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,9 +26,14 @@
                                 <?= $f['folder']; ?>
                             </a>
                         </td>
-                        <td><?= $f['parent']; ?></td>
+                        <td><?= time_ago($f['updated_at']); ?></td>
                     </tr>
                 <?php endforeach; ?>
+                <?php if (!$folder) : ?>
+                    <tr>
+                        <td colspan="6" class="text-center">Tidak ada item</td>
+                    </tr>
+                <?php endif; ?>
             </tbody>
         </table>
     </div>

@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use Config\Validation;
+
 class Auth extends BaseController
 {
     public function __construct()
@@ -13,10 +15,10 @@ class Auth extends BaseController
     public function index()
     {
 
-        $fruit = ['Anggur', 'Mangga', 'Melon', 'Apel', 'Alpukat', 'Kiwi', 'Sirsak', 'Jambu', 'Nanas', 'Pisang'];
+        $fruit = ['Anggur', 'Mangga', 'Melon', 'Apel', 'Alpukat', 'Kiwi', 'Sirsak', 'Jambu', 'Nanas', 'Pisang', 'Lemon'];
         $data = [
             'title' => "Login",
-            'captcha' => $fruit[rand(0, 9)],
+            'captcha' => $fruit[rand(0, 10)],
             'validation' => $this->validation
         ];
 
@@ -59,6 +61,8 @@ class Auth extends BaseController
             if (password_verify($password, $user['password'])) {
                 if ($user['role']) {
                     session()->set('sarbi-sic', $user['user_id']);
+
+                    setToast('success', 'Yeay anda berhasil login');
                     return redirect()->to('/home');
                 }
             } else {
@@ -98,6 +102,46 @@ class Auth extends BaseController
         $this->userModel->save($input);
         setMsg('primary', '<strong>Daftar berhasil!</strong> silahkan login.');
         return redirect()->to('/auth');
+    }
+
+    public function updatePassword()
+    {
+        $data = [
+            'title' => "Change Password",
+            'validation' => $this->validation
+        ];
+
+        return view('profile/ubah_password', $data);
+    }
+
+    public function changePassword()
+    {
+
+        $this->validation->setRules([
+            'old_password' => ['label' => 'Password Lama', 'rules' => 'required|min_length[4]|alpha_dash'],
+            'password' => ['label' => 'Password Baru', 'rules' => 'required|min_length[4]|alpha_dash'],
+            'password2' => ['label' => 'Konfirmasi Password', 'rules' => 'required|min_length[4]|alpha_dash|matches[password]'],
+        ]);
+
+        if (!$this->validation->withRequest($this->request)->run()) {
+            return redirect()
+                ->to('/auth/updatePassword')
+                ->withInput()
+                ->with('validation', $this->validation);
+        }
+
+        $input = $this->request->getVar(null, FILTER_SANITIZE_STRING);
+        $userId = $this->userModel->getUser(['user_id' => userdata('user_id')]);
+
+        if (password_verify($input['old_password'], $userId['password'])) {
+            $newPass = password_hash($input['password'], PASSWORD_DEFAULT);
+            $this->userModel->updatePassword($newPass, $userId['user_id']);
+            setToast('success', 'Password berhasil diubah, Silahkan login kembali');
+            return redirect()->to('/auth/updatePassword');
+        } else {
+            setToast('warning', 'Old Password does not matched with db password');
+            return redirect()->to('/auth/updatePassword');
+        }
     }
 
     public function logout()

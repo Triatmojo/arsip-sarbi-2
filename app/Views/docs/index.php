@@ -160,7 +160,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="kategori_id">Kategori</label>
-                        <select name="kategori_id" id="kategori_id" class="form-control <?= $validation->hasError('kategori_id') ? 'is-invalid' : '' ?>">
+                        <select name="kategori_id" id="kategori_id" class="form-control">
                             <option value="0">None</option>
                             <?php foreach ($kategori as $k) : ?>
                                 <option value="<?= $k['kategori_id'] ?>"><?= $k['kategori_nama']; ?></option>

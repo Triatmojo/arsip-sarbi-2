@@ -64,6 +64,8 @@ class Filters extends BaseConfig
     public $filters = [
         'checklogin' => [
             'before' => [
+                'auth/updatePassword',
+                'auth/updatePassword/*',
                 'home',
                 'home/*',
                 'docs',

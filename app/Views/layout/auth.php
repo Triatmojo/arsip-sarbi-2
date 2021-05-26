@@ -36,18 +36,18 @@
     <script src="<?= base_url() ?>/dist/js/adminlte.min.js"></script>
 
     <script type="text/javascript">
-    $(function() {
-        // SwalToast
-        var Toast = Swal.mixin({
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 3000
-        });
+        $(function() {
+            // SwalToast
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                timer: 3000
+            });
 
-        // Memanggil fungsi toast pada helper 
-        <?= session()->getFlashdata('toast'); ?>
-    });
+            // Memanggil fungsi toast pada helper 
+            <?= session()->getFlashdata('toast'); ?>
+        });
     </script>
 </body>
 

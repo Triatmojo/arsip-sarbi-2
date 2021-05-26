@@ -16,8 +16,8 @@ function setMsg($type, $msg)
 function setToast($tipe = 'success', $pesan = '')
 {
     $toast  = "Toast.fire({";
-    $toast .= "icon: '{$tipe}',";
-    $toast .= "title: '{$pesan}'";
+    $toast .=   "icon: '{$tipe}',";
+    $toast .=   "title: '{$pesan}'";
     $toast .= "});";
 
     return session()->setFlashdata('toast', $toast);

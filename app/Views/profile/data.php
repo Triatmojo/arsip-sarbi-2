@@ -8,7 +8,7 @@
                 <div class="text-center">
                     <img class="profile-user-img img-fluid img-circle" src="<?= base_url() ?>/img/<?= userdata('image') ?>" alt="User-profile">
                 </div>
-                <h3 class="profile-username text-center"><?= userdata('username') ?></h3>
+                <h3 class="profile-username text-center"><?= userdata('nama_lengkap') ?></h3>
                 <p class="text-muted text-center"><?= userdata('role'); ?></p>
 
                 <ul class="list-group list-group-unbordered mb-3">

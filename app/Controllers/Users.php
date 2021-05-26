@@ -25,6 +25,7 @@ class Users extends BaseController
             'title' => "Add User",
             'validation' => $this->validation
         ];
+
         return view('user/add', $data);
     }
 
@@ -52,6 +53,8 @@ class Users extends BaseController
         unset($input['csrf_test_name']);
 
         $this->userModel->save($input);
+
+        setToast('success', 'Data berhasil ditambah');
         return redirect()->to('/users');
     }
 
@@ -91,6 +94,8 @@ class Users extends BaseController
         }
 
         $this->userModel->save($input);
+
+        setToast('success', 'Data berhasil diubah');
         return redirect()->to('/users');
     }
 
@@ -101,12 +106,16 @@ class Users extends BaseController
         foreach ($check as $id) {
             $this->userModel->delete($id);
         }
+
+        setToast('success', 'Data berhasil dihapus');
         return redirect()->to('/users');
     }
 
     public function delete($id)
     {
         $this->userModel->delete($id);
+
+        setToast('success', 'Data berhasil dihapus');
         return redirect()->to('/users');
     }
 }

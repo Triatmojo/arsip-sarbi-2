@@ -47,10 +47,9 @@
                                             <a href="/jenis/edit/<?= $j['jenis_id']; ?>" class="dropdown-item btnEditFolder">
                                                 <i class="fas fa-fw fa-edit text-warning"></i> Update
                                             </a>
-                                            <form action="/jenis/delete/<?= $j['jenis_id'] ?>" method="POST">
-                                                <?= csrf_field(); ?>
+                                            <form action="/jenis/delete/<?= $j['jenis_id']; ?>" method="POST">
                                                 <input type="hidden" name="_method" value="DELETE">
-                                                <button onclick="confirm('yakin dihapus?')" type="submit" class="dropdown-item">
+                                                <button onclick="confirm('Yakin ingin dihapus?')" type="submit" class="dropdown-item">
                                                     <i class="fas fa-fw fa-trash text-danger"></i> Delete
                                                 </button>
                                             </form>

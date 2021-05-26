@@ -48,6 +48,8 @@ class Jenis extends BaseController
 
         $input = $this->request->getVar(null, FILTER_SANITIZE_STRING);
         $this->jenisModel->save($input);
+
+        setToast('success', 'Data berhasil ditambah');
         return redirect()->to('/jenis');
     }
 
@@ -80,6 +82,8 @@ class Jenis extends BaseController
         }
 
         $this->jenisModel->save($input);
+
+        setToast('success', 'Data berhasil diubah');
         return redirect()->to('/jenis');
     }
 
@@ -90,12 +94,16 @@ class Jenis extends BaseController
         foreach ($check as $id) {
             $this->jenisModel->delete($id);
         }
+
+        setToast('success', 'Data berhasil dihapus');
         return redirect()->to('/jenis');
     }
 
     public function delete($id)
     {
         $this->jenisModel->delete($id);
+
+        setToast('success', 'Data berhasil dihapus');
         return redirect()->to('/jenis');
     }
 }

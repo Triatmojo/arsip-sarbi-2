@@ -27,7 +27,7 @@ class Docs extends BaseController
     public function index($id = 0)
     {
         $data = [
-            'title' => 'Home',
+            'title' => 'Files',
             'folder' => $this->docsModel->getParent($id),
             'files' => $this->fileModel->getFilebyFolder($id),
             'kategori' => $this->kategoriModel->get(),
@@ -59,6 +59,8 @@ class Docs extends BaseController
         $input = $this->request->getVar(null, FILTER_SANITIZE_STRING);
 
         $this->docsModel->save($input);
+
+        setToast('success', 'Folder berhasil dibuat');
         return redirect()->to('/docs/' . $input['folder_parent']);
     }
 
@@ -67,6 +69,8 @@ class Docs extends BaseController
         $del =  $this->docsModel->getParentIdByFolder($id);
 
         $this->docsModel->delete($id);
+
+        setToast('success', 'Folder berhasil dihapus');
         return redirect()->to('/docs/' . $del);
     }
 
@@ -101,6 +105,8 @@ class Docs extends BaseController
         }
 
         // return redirect()->to('/docs' . '/' . $data['folder_id']);
+
+        setToast('success', 'File berhasil ditambah');
         return redirect()->to($_SERVER['HTTP_REFERER']);
     }
 
@@ -114,6 +120,7 @@ class Docs extends BaseController
 
         $this->fileModel->save($data);
 
+        setToast('success', 'File berhasil diubah');
         return redirect()->to('/docs' . '/'  . $data['folder_id']);
     }
 
@@ -129,6 +136,8 @@ class Docs extends BaseController
 
         $this->fileModel->delete($id);
         // return redirect()->to('/docs' . '/' . $folder);
+
+        setToast('success', 'File berhasil dihapus');
         return redirect()->to($_SERVER['HTTP_REFERER']);
     }
 

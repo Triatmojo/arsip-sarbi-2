@@ -24,4 +24,11 @@ class UserModel extends Model
     {
         return $this->where(['username' => $username])->first();
     }
+
+    public function updatePassword($password = null, $userId)
+    {
+        $builder = $this->db->table('users');
+        $builder->where(['user_id' => $userId]);
+        return $builder->update(['password' => $password]);
+    }
 }
