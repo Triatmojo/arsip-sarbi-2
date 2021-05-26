@@ -91,7 +91,7 @@
                             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                                 <li>
                                     <a href="/auth/updatePassword" class="dropdown-item">
-                                        <i class="fa fa-exchange-alt fa-stack"></i> Reset Password
+                                        <i class="fa fa-exchange-alt fa-stack"></i> Change Password
                                     </a>
                                     <a href="/auth/logout" class="dropdown-item">
                                         <i class="fa fa-sign-out-alt fa-stack"></i>Sign-out
