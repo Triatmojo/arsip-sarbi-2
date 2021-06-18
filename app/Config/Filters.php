@@ -65,7 +65,6 @@ class Filters extends BaseConfig
         'checklogin' => [
             'before' => [
                 'auth/updatePassword',
-                'auth/updatePassword/*',
                 'home',
                 'home/*',
                 'docs',
@@ -78,6 +77,8 @@ class Filters extends BaseConfig
                 'jenis/*',
                 'kategori/',
                 'kategori/*',
+                'myfolder/',
+                'myfolder/*'
             ]
         ]
     ];

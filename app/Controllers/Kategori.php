@@ -74,7 +74,7 @@ class Kategori extends BaseController
 
         $this->kategoriModel->save($input);
 
-        setToast('success', 'Data berhasil diubah')
+        setToast('success', 'Data berhasil diubah');
         return redirect()->to('/kategori');
     }
 

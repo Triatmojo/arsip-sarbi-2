@@ -41,31 +41,28 @@
                     <input type="hidden" name="user_id" value="<?= userdata('user_id'); ?>">
                     <div class="form-group">
                         <label for="nama_lengkap">Nama Lengkap</label>
-                        <input type="text" value="<?= userdata('nama_lengkap') ?>" name="nama_lengkap" id="nama_lengkap" class="form-control <?= $validation->hasError('nama_lengkap') ? 'is-invalid' : ''; ?>" placeholder="Enter nama lengkap...">
+                        <input type="text" value="<?= userdata('nama_lengkap') ?>" name="nama_lengkap" id="nama_lengkap" class="form-control <?= $validation->hasError('nama_lengkap') ? 'is-invalid' : ''; ?>">
                         <div class="invalid-feedback">
                             <?= $validation->getError('nama_lengkap'); ?>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" value="<?= userdata('email'); ?>" name="email" id="email" class="form-control <?= $validation->hasError('email') ? 'is-invalid' : '' ?>" placeholder="Enter email...">
+                        <input type="text" value="<?= userdata('email'); ?>" name="email" id="email" class="form-control <?= $validation->hasError('email') ? 'is-invalid' : '' ?>">
                         <div class="invalid-feedback">
                             <?= $validation->getError('email'); ?>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="no_telp">No Handphone</label>
-                        <input type="number" value="<?= userdata('no_telp'); ?>" name="no_telp" id="no_telp" class="form-control <?= $validation->hasError('no_telp') ? 'is-invalid' : '' ?>" placeholder="Enter nama lengkap...">
+                        <input type="number" value="<?= userdata('no_telp'); ?>" name="no_telp" id="no_telp" class="form-control <?= $validation->hasError('no_telp') ? 'is-invalid' : '' ?>">
                         <div class="invalid-feedback">
                             <?= $validation->getError('no_telp'); ?>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="image">Foto</label>
-                        <input type="file" value="<?= userdata('image'); ?>" name="image" id="image" class="form-control <?= $validation->hasError('image') ? 'is-invalid' : '' ?>" placeholder="Enter nama lengkap...">
-                        <div class="invalid-feedback">
-                            <?= $validation->getError('image'); ?>
-                        </div>
+                        <input type="file" value="<?= userdata('image'); ?>" name="image" id="image" class="form-control">
                     </div>
                     <div class="text-right">
                         <button type="submit" class="btn btn-info">Simpan</button>

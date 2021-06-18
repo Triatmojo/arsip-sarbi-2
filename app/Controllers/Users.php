@@ -19,11 +19,30 @@ class Users extends BaseController
         return view('user/data', $data);
     }
 
+    // Register member baru 
+    private function _generated()
+    {
+        // NU0001
+        $char = "NU";
+        $field = "user_id";
+
+        $lastKode = $this->userModel->getMax($field);
+
+        // mengambil 5 karakter dari belakang
+        $noUrut = (int) substr($lastKode['user_id'], -3, 3);
+        $noUrut += 1;
+
+        // mengubah kembali manjadi string 
+        $newKode = $char . sprintf("%03s", $noUrut);
+        return $newKode;
+    }
+
     public function add()
     {
         $data = [
             'title' => "Add User",
-            'validation' => $this->validation
+            'validation' => $this->validation,
+            'kode' => $this->_generated()
         ];
 
         return view('user/add', $data);
@@ -52,7 +71,8 @@ class Users extends BaseController
         $input['image'] = 'default.png';
         unset($input['csrf_test_name']);
 
-        $this->userModel->save($input);
+
+        $this->userModel->insertUser($input);
 
         setToast('success', 'Data berhasil ditambah');
         return redirect()->to('/users');

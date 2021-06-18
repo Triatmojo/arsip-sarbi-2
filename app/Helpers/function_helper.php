@@ -88,4 +88,52 @@ if (!function_exists('time_ago')) {
 
         return "$difference $periods[$j] ago ";
     }
+
+    function notifikasiFolder()
+    {
+        $thisFolder = new \App\Models\DocsModel();
+        $thisJenis = new \App\Models\JenisModel();
+        $thisFile = new \App\Models\FileModel();
+        $thisAkses = new \App\Models\FolderaksesModel();
+
+        $fileNotif = $thisAkses->getFolderNotif(userdata('user_id'));
+
+        $notifName = [];
+        foreach ($fileNotif as $notif) {
+            $folder = $thisFolder->where(['folder_id' => $notif['folder_id']])->first();
+            $parent = $thisFolder->where(['folder_id' => $folder['folder_parent']])->first();
+
+            $jenis = $thisJenis->where(['kategori_id' => $folder['kategori_id']])->findAll();
+
+            // Cek File yang sudah terupload
+            $terupload = $thisFile->where(['folder_id' => $folder['folder_id']])->findAll();
+            $jnsupload = [];
+            foreach ($terupload as $gt) {
+                $jnsupload[] = $gt['jenis_id'];
+            }
+
+            // Cek file belum diupload
+            $blmupload = [];
+            foreach ($jenis as $jns) {
+                // cek file yg harus diupload dan tidak
+                if ($jns['is_required'] == 1) {
+                    // cekfile yg telah diupload
+                    if (!in_array($jns['jenis_id'], $jnsupload)) {
+                        $blmupload[] = $jns;
+                    }
+                }
+            }
+
+            if (count($blmupload) != 0) {
+                $notifName[] = [
+                    'folderId' => $notif['folder_id'],
+                    'namaFolder'  => $notif['nama'],
+                    'namaPt'  => $notif['parent']
+                ];
+            }
+        }
+
+
+        return $notifName;
+    }
 }

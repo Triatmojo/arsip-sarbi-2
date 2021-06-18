@@ -23,11 +23,19 @@
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="<?= base_url(); ?>/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+    <link rel="stylesheet" href="<?= base_url(); ?>/dist/css/adminlte.min.css">
+
 </head>
 </head>
 
 <body class="hold-transition layout-top-nav">
     <div class="wrapper">
+
+        <!-- Preloader -->
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="<?= base_url(); ?>/img/logo_besar.png" alt="AdminLTELogo" height="60" width="60">
+        </div>
 
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand-md navbar-dark bg-lightblue navbar-white">
@@ -79,7 +87,27 @@
                             <li class="nav-item">
                                 <a href="<?= base_url('myfolder'); ?>" class="nav-link">Folder Saya</a>
                             </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                                    <i class="far fa-bell"></i>
+                                    <span class="badge badge-warning navbar-badge"><?= count(notifikasiFolder()) ?></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+                                    <p class="text-center p-2">Notifikasi</p>
+                                    <div class="dropdown-divider"></div>
+                                    <?php foreach (notifikasiFolder() as $notif) : ?>
+                                        <a href="<?= base_url() ?>/home/upload_file/<?= $notif['folderId']; ?>" class="dropdown-item">
+                                            <i class="fas fa-file mr-2"></i>File belum lengkap <strong class="text-info"><?= $notif['namaFolder']; ?></strong> <br> <span class="text-center"><?= $notif['namaPt']; ?></span>
+                                        </a>
+                                    <?php endforeach; ?>
+                                </div>
+                            </li>
                         <?php endif; ?>
+                        <?php if(is_admin()) :  ?>
+                        <li class="nav-item">
+                            <a href="<?= base_url('laporan'); ?>" class="nav-link <?= activeMenu('laporan'); ?>">Laporan</a>
+                        </li>
+                        <?php  endif; ?>
                         <li class="nav-item dropdown">
                             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="nav-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -171,7 +199,6 @@
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
-
     <!-- jQuery -->
     <script src="<?= base_url() ?>/plugins/jquery/jquery.min.js"></script>
     <script src="<?= base_url(); ?>/plugins/moment/moment.min.js"></script>
@@ -206,6 +233,9 @@
     <!-- SweetAlert2 -->
     <script src="<?= base_url(); ?>/plugins/sweetalert2/sweetalert2.min.js"></script>
     <script scr="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
+
+    <script src="<?= base_url(); ?>/dist/js/adminlte.min.js"></script>
+
 
     <script type="text/javascript">
         $(document).ready(function() {

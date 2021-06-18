@@ -41,4 +41,19 @@ class FolderaksesModel extends Model
         $this->join('folder as parent', 'folder.folder_parent=parent.folder_id', 'left');
         return $this->where('folder_access.user_id', $user_id)->findAll();
     }
+
+    public function getFolderNotif($user_id)
+    {
+        $this->select('folder.folder_id,folder.folder_name as nama,parent.folder_name as parent,folder.folder_parent,folder.updated_at,folder_access.user_id');
+        $this->join('folder', 'folder_id', 'left');
+        $this->join('folder as parent', 'folder.folder_parent=parent.folder_id', 'left');
+        return $this->where('folder_access.user_id', $user_id)->findAll();
+    }
+
+    public function deleteAkses($id)
+    {
+        $builder = $this->db->table('folder_access');
+        $builder->where($id);
+        return $builder->delete();
+    }
 }

@@ -25,14 +25,6 @@ class Auth extends BaseController
         return view('auth/login', $data);
     }
 
-    public function register()
-    {
-        $data = [
-            'title' => "Registrasi",
-            'validation' => $this->validation
-        ];
-        return view('auth/register', $data);
-    }
 
     public function proses()
     {
@@ -61,7 +53,6 @@ class Auth extends BaseController
             if (password_verify($password, $user['password'])) {
                 if ($user['role']) {
                     session()->set('sarbi-sic', $user['user_id']);
-
                     setToast('success', 'Yeay anda berhasil login');
                     return redirect()->to('/home');
                 }
@@ -71,6 +62,36 @@ class Auth extends BaseController
         }
         return redirect()->to('/auth')->withInput();
     }
+
+
+    // Register member baru 
+    private function _generated()
+    {
+        // NU0001
+        $char = "NU";
+        $field = "user_id";
+
+        $lastKode = $this->userModel->getMax($field);
+
+        // mengambil 5 karakter dari belakang
+        $noUrut = (int) substr($lastKode['user_id'], -3, 3);
+        $noUrut += 1;
+
+        // mengubah kembali manjadi string 
+        $newKode = $char . sprintf("%03s", $noUrut);
+        return $newKode;
+    }
+
+    public function register()
+    {
+        $data = [
+            'title' => "Registrasi",
+            'validation' => $this->validation,
+            'kode' => $this->_generated()
+        ];
+        return view('auth/register', $data);
+    }
+
 
     private function _rules()
     {
@@ -95,11 +116,13 @@ class Auth extends BaseController
         }
 
         $input = $this->request->getVar(null, FILTER_SANITIZE_STRING);
+
         $input['password'] = password_hash($input['password'], PASSWORD_DEFAULT);
         $input['role'] = 'karyawan';
+        $input['image'] = 'default.png';
         unset($input['csrf_test_name']);
 
-        $this->userModel->save($input);
+        $this->userModel->insertUser($input);
         setMsg('primary', '<strong>Daftar berhasil!</strong> silahkan login.');
         return redirect()->to('/auth');
     }
@@ -114,6 +137,8 @@ class Auth extends BaseController
         return view('profile/ubah_password', $data);
     }
 
+
+    // mengubah password 
     public function changePassword()
     {
 

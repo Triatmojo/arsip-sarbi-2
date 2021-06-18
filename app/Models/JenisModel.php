@@ -22,4 +22,11 @@ class JenisModel extends Model
 
         return $this->where(['jenis_id' => $id])->first();
     }
+
+    public function getFileIdByNull()
+    {
+        $this->join('file', 'jenis_id', 'LEFT');
+        $this->where(['file_id' => null]);
+        return $this->findAll();
+    }
 }

@@ -73,6 +73,7 @@ class Myfolder extends BaseController
             'blmupload' => $blmupload,
         ];
 
+
         return view('docs/upload_kategori', $data);
     }
 

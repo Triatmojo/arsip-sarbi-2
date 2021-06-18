@@ -10,7 +10,7 @@ class FileModel extends Model
     protected $primaryKey = 'file_id';
     protected $useTimestamps = true;
 
-    protected $allowedFields = ['folder_id', 'nama_file', 'file', 'jenis_id'];
+    protected $allowedFields = ['folder_id', 'nama_file', 'file', 'jenis_id', 'user_id'];
 
     public function getFile()
     {

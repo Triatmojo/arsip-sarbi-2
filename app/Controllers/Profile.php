@@ -27,7 +27,6 @@ class Profile extends BaseController
             'nama_lengkap' => ['label' => 'Nama Lengkap', 'rules' => 'required'],
             'email' => ['label' => 'email', 'rules' => 'required|valid_email'],
             'no_telp' => ['label' => 'no_telp', 'rules' => 'required'],
-            'image' => ['label' => 'Image', 'rules' => 'required|is_image[image]|mime_in[image, image/jpg,image/png,image/jpeg]']
         ]);
     }
 
@@ -47,12 +46,14 @@ class Profile extends BaseController
 
         if ($this->validation->withRequest($this->request)->run()) {
             return redirect()
-                ->to('/profile/' . $input['user_id'])
+                ->to('/profile')
                 ->withInput()
                 ->with('validation', $this->validation);
         }
 
+        dd($input);
+
         $this->userModel->save($input);
-        return redirect()->to('/profile');
+        return redirect()->to($_SERVER['HTTP_REFERER']);
     }
 }

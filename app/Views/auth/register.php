@@ -16,6 +16,7 @@
 
         <?= form_open('auth/save', ['autocomplete' => "off"]); ?>
         <?= csrf_field(); ?>
+        <input type="hidden" name="user_id" value="<?= $kode; ?>">
         <div class="form-group">
             <div class="input-group">
                 <input value="<?= old('nama_lengkap') ?>" autofocus onfocus="this.select()" name="nama_lengkap" type="text" class="form-control <?= $validation->hasError('nama_lengkap') ? 'is-invalid' : '' ?>" placeholder="Nama Lengkap...">

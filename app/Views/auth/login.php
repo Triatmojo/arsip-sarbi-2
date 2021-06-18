@@ -57,7 +57,7 @@
          <?= form_close(); ?>
          <p class="small text-center text-muted pt-2">
              Register Account? <br>
-             <a href="http://localhost:8080/auth/register">Resigter</a>
+             <a href="http://localhost:8080/auth/register">Register</a>
          </p>
      </div>
      <!-- /.card-body -->

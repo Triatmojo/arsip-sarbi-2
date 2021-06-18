@@ -69,7 +69,6 @@ class Docs extends BaseController
         $del =  $this->docsModel->getParentIdByFolder($id);
 
         $this->docsModel->delete($id);
-
         setToast('success', 'Folder berhasil dihapus');
         return redirect()->to('/docs/' . $del);
     }
@@ -87,12 +86,6 @@ class Docs extends BaseController
 
                 $data = $this->request->getVar(null, FILTER_SANITIZE_STRING);
                 $data['file'] = $fileDoc;
-
-                // $nmFile = explode('.', $fileDoc->getClientName());
-                // array_pop($nmFile);
-                // $realFile = implode(' ', $nmFile);
-
-                // $data['nama_file'] = $realFile;
                 $data['nama_file'] = $fileDoc->getClientName();
                 $data['folder_id'] = $data['folder_id'];
                 $data['file'] = $fileName;
@@ -103,8 +96,6 @@ class Docs extends BaseController
         } else {
             return view('docs/errors');
         }
-
-        // return redirect()->to('/docs' . '/' . $data['folder_id']);
 
         setToast('success', 'File berhasil ditambah');
         return redirect()->to($_SERVER['HTTP_REFERER']);
@@ -135,8 +126,6 @@ class Docs extends BaseController
         }
 
         $this->fileModel->delete($id);
-        // return redirect()->to('/docs' . '/' . $folder);
-
         setToast('success', 'File berhasil dihapus');
         return redirect()->to($_SERVER['HTTP_REFERER']);
     }
@@ -214,11 +203,9 @@ class Docs extends BaseController
             foreach ($shared as $s) {
                 $this->akses->delete($s['id']);
             }
-
             // save
             $this->akses->save($data);
         }
-
         return redirect()->to('/docs/index/' . $input['folder_id']);
     }
 }

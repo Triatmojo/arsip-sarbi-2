@@ -143,8 +143,5 @@ $(function () {
     }
   })
 })
-<<<<<<< HEAD
-=======
 
 // lgtm [js/unused-local-variable]
->>>>>>> trii

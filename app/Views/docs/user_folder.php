@@ -7,7 +7,7 @@
         </h3>
     </div>
     <div class="card-body">
-        <table class="table w-100 table-sm" id="browse">
+        <table class="table w-100 table-hover table-sm" id="browse">
             <thead>
                 <tr>
                     <th>No</th>
@@ -46,11 +46,9 @@
 <script>
     $(document).ready(function() {
         $('#browse').DataTable({
+            "scrollY": '50vh',
+            "scrollCollapse": true,
             "paging": false,
-            "ordering": false,
-            "info": false,
-            "dom": "<'row px-2 px-md-4 pt-2'<'col-md'f>>" +
-                "<'row'<'col-md-12'tr>>"
         });
     })
 </script>

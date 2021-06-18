@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header card-outline card-teal">
+                <div class="card-header card-outline card-info">
                     <div class="row">
                         <div class="col d-flex">
                             <h3 class="card-title text-capitalize align-items-center">
@@ -22,6 +22,7 @@
                     <?= csrf_field(); ?>
                     <div class="row">
                         <div class="col-lg-6">
+                            <input type="hidden" name="user_id" value="<?= $kode; ?>">
                             <div class="form-group">
                                 <label for="nama_lengkap">Full Name</label>
                                 <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control <?= $validation->hasError('nama_lengkap') ? 'is-invalid' : '' ?>" placeholder="Enter fullname...">

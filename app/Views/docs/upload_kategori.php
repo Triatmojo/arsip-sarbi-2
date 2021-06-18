@@ -63,7 +63,7 @@
                             <?php foreach ($terupload as $t) : ?>
                                 <?php if ($item['jenis_id'] == $t['jenis_id']) : ?>
                                     <td class="align-middle text-center text-muted small">
-                                        <?= $t['nama_file']; ?>
+                                        <a href="<?= base_url(); ?>/files/<?= $t['file'] ?>" class="text-dark"><?= $t['nama_file']; ?></a>
                                     </td>
                                     <td class="text-center align-middle">
                                         <button onclick="location.href= '<?= base_url(); ?>/docs/deleteFile/<?= $t['file_id'] ?>'" type="button" class="btn btn-sm btn-danger">
