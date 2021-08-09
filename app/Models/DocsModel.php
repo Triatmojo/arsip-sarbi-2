@@ -10,7 +10,7 @@ class DocsModel extends Model
     protected $primaryKey = 'folder_id';
     protected $useTimeStamps = true;
 
-    protected $allowedFields = ['folder_name', 'folder_parent', 'kategori_id', 'jenis_akses'];
+    protected $allowedFields = ['folder_name', 'folder_parent', 'kategori_id', 'user_id'];
 
     public function getDoc($id = null)
     {

@@ -1,5 +1,4 @@
  <?= $this->extend('layout/auth'); ?>
-
  <?= $this->section('content'); ?>
  <!-- /.login-logo -->
  <div class="card card-outline card-info">

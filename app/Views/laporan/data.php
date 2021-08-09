@@ -9,17 +9,18 @@
                 <h3 class="card-title"><?= $title; ?> Karyawan</h3>
             </div>
             <div class="card-body card-outline-info">
-                <?php form_open(); ?>
+                <?= form_open('laporan/search'); ?>
+                <?= csrf_field(); ?>
                 <div class="form-group">
                     <label for="tanggal">Tanggal</label>
                     <div class="input-group mb-3">
                         <input value="<?= set_value('tanggal', date('Y-m-d')) ?>" name="tanggal" id="tanggal" type="text" class="form-control">
                         <div class="input-group-append">
-                            <button class="btn btn-info" type="button" id="button-addon2">Filter</button>
+                            <button class="btn btn-info" type="submit">Filter</button>
                         </div>
                     </div>
                 </div>
-                <?php form_close(); ?>
+                <?= form_close(); ?>
             </div>
         </div>
     </div>
@@ -27,24 +28,32 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body card-outline-info">
-                <table class="table table-hover table-striped" id="browse">
+                <table class="table table-hover table-striped table-light" id="datatable">
                     <thead class="text-secondary">
                         <tr>
                             <th>No.</th>
-                            <th>Nama Dokumen</th>
-                            <th>PT</th>
-                            <th>Folder</th>
-                            <th>Karyawan</th>
+                            <th>Perusahaan</th>
+                            <th>PHP/VLK</th>
+                            <th>Dokumen</th>
+                            <th>User</th>
+                            <th>Tanggal</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                        <?php if ($periode) : ?>
+                            <?php
+                            $no = 1;
+                            foreach ($periode as $p) : ?>
+                                <tr>
+                                    <td><?= $no++ ?></td>
+                                    <td><?= $p['folder_name']; ?></td>
+                                    <td><?= $p['kategori_nama'];  ?></td>
+                                    <td><?= substr($p['jenis_nama'], 0, 40);  ?>...</td>
+                                    <td><?= $p['nama_lengkap'] ?></td>
+                                    <td><?= date('Y-m-d', strtotime($p['created_at'])); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>

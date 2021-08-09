@@ -50,6 +50,13 @@ class FolderaksesModel extends Model
         return $this->where('folder_access.user_id', $user_id)->findAll();
     }
 
+    public function getFolder()
+    {
+        $this->join('folder', 'folder_id', 'LEFT');
+        $this->join('folder as parent', 'folder.folder_parent=parent.folder_id', 'LEFT');
+        return $this->findAll();
+    }
+
     public function deleteAkses($id)
     {
         $builder = $this->db->table('folder_access');

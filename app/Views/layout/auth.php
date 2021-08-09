@@ -18,13 +18,50 @@
     <link rel="stylesheet" href="<?= base_url() ?>/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= base_url() ?>/dist/css/adminlte.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="<?= base_url() ?>/dist/css/custom.css">
 </head>
 
-<body class="hold-transition login-page">
-    <div class="login-box">
-        <?= $this->renderSection('content'); ?>
+<body>
+    <div id="particle-container">
+        <div class=" particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
     </div>
-    <!-- /.login-box -->
+
+    <div class="login-page">
+        <div class="login-box">
+            <?= $this->renderSection('content'); ?>
+        </div>
+    </div>
+
 
     <!-- jQuery -->
     <script src="<?= base_url() ?>/plugins/jquery/jquery.min.js"></script>

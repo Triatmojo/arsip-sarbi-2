@@ -59,9 +59,6 @@
                                 <a href="<?= base_url() ?>/docs" class="nav-link <?= activeMenu('docs'); ?>">Files</a>
                             </li>
                         <?php endif; ?>
-                        <li class="nav-item">
-                            <a href="<?= base_url() ?>/profile" class="nav-link <?= activeMenu('profile'); ?>">Profile</a>
-                        </li>
                         <?php if (is_admin()) : ?>
                             <li class="nav-item dropdown">
                                 <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Settings</a>
@@ -103,11 +100,11 @@
                                 </div>
                             </li>
                         <?php endif; ?>
-                        <?php if(is_admin()) :  ?>
-                        <li class="nav-item">
-                            <a href="<?= base_url('laporan'); ?>" class="nav-link <?= activeMenu('laporan'); ?>">Laporan</a>
-                        </li>
-                        <?php  endif; ?>
+                        <?php if (is_admin()) :  ?>
+                            <li class="nav-item">
+                                <a href="<?= base_url('laporan'); ?>" class="nav-link <?= activeMenu('laporan'); ?>">Laporan</a>
+                            </li>
+                        <?php endif; ?>
                         <li class="nav-item dropdown">
                             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="nav-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -118,6 +115,9 @@
                             </a>
                             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                                 <li>
+                                    <a href="/profile" class="dropdown-item">
+                                        <i class="fa fa-user fa-stack"></i> Profile
+                                    </a>
                                     <a href="/auth/updatePassword" class="dropdown-item">
                                         <i class="fa fa-exchange-alt fa-stack"></i> Change Password
                                     </a>
@@ -242,7 +242,7 @@
             var table = $('#datatable').DataTable({
                 processing: true,
                 severSide: true,
-                buttons: ['copy', 'csv', 'print', 'excel'],
+                buttons: ['copy', 'pdf', 'excel'],
                 dom: "<'row px-2 px-md-4 pt-2'<'col-md-3'l><'col-md-5 text-center'B><'col-md-4'f>>" +
                     "<'row'<'col-md-12'tr>>" +
                     "<'row px-2 px-md-4 py-3'<'col-md-5'i><'col-md-7'p>>",
