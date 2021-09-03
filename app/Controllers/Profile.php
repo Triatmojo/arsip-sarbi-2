@@ -33,8 +33,6 @@ class Profile extends BaseController
 
     public function update()
     {
-        $this->_rules();
-
         $profile = $this->request->getFile('image');
 
         $fileName = $profile->getRandomName();
@@ -50,8 +48,6 @@ class Profile extends BaseController
                 ->withInput()
                 ->with('validation', $this->validation);
         }
-
-        dd($input);
 
         $this->userModel->save($input);
         return redirect()->to($_SERVER['HTTP_REFERER']);

@@ -46,7 +46,7 @@
                             foreach ($periode as $p) : ?>
                                 <tr>
                                     <td><?= $no++ ?></td>
-                                    <td><?= $p['folder_name']; ?></td>
+                                    <td><?= getFolderName($p['folder_parent']); ?></td>
                                     <td><?= $p['kategori_nama'];  ?></td>
                                     <td><?= substr($p['jenis_nama'], 0, 40);  ?>...</td>
                                     <td><?= $p['nama_lengkap'] ?></td>

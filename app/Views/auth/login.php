@@ -40,15 +40,16 @@
                  </div>
              </div>
          </div>
-         <div id="captcha-form" class="bg-light mb-3 p-2 border rounded user-select-none">
+         <div id="captha-form" class="bg-light mb-3 p-2 border rounded user-select-none">
              <div class="row mb-0">
                  <div class="col-5 d-flex justify-content-center">
-                     <span id="captcha-text" class="text-primary font-weight-bold align-self-center">
-                         <?= $captcha; ?>
-                     </span>
+                     <span class="font-weight-bold text-primary align-self-center"><?= $captcha; ?></span>
                  </div>
                  <div class="col-7">
-                     <input name="captcha" type="text" class="form-control form-control-sm <?= $validation->hasError('captcha') ? 'is-invalid' : ''; ?>" placeholder="Ketik kata disamping">
+                     <input type="text" name="captcha" class="form-control form-control-sm <?= $validation->hasError('captcha') ? 'is-invalid' : '' ?>" placeholder="Ketik kata disamping">
+                     <div class="invalid-feedback">
+                         <?= $validation->getError('captcha'); ?>
+                     </div>
                  </div>
              </div>
          </div>

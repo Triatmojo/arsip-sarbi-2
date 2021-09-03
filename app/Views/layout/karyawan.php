@@ -90,7 +90,11 @@
                                     <span class="badge badge-warning navbar-badge"><?= count(notifikasiFolder()) ?></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
-                                    <p class="text-center p-2">Notifikasi</p>
+                                    <?php if (notifikasiFolder()) : ?>
+                                        <p class="text-center p-2">Notifikasi</p>
+                                    <?php elseif (!notifikasiFolder()) : ?>
+                                        <p class="text-center p-2">Belum ada folder</p>
+                                    <?php endif ?>
                                     <div class="dropdown-divider"></div>
                                     <?php foreach (notifikasiFolder() as $notif) : ?>
                                         <a href="<?= base_url() ?>/home/upload_file/<?= $notif['folderId']; ?>" class="dropdown-item">

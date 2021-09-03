@@ -137,3 +137,11 @@ if (!function_exists('time_ago')) {
         return $notifName;
     }
 }
+
+function getFolderName($folder_id)
+{
+    $db = \Config\Database::connect();
+    $folder = $db->table('folder')->where(['folder_id' => $folder_id])->get()->getRow();
+
+    return $folder->folder_name;
+}
