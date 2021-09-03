@@ -31,7 +31,7 @@ class Auth extends BaseController
         $this->validation->setRules([
             'username' => ['label' => 'Username', 'rules' => 'required'],
             'password' => ['label' => 'Password', 'rules' => 'required'],
-            'captcha' => ['label' => 'Captha', 'rules' => 'required']
+            'captcha' => ['label' => 'Captha', 'rules' => 'required|matches[captcha_code]']
         ]);
 
         if (!$this->validation->withRequest($this->request)->run()) {
