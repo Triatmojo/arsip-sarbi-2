@@ -3,7 +3,7 @@
  <!-- /.login-logo -->
  <div class="card card-outline card-info">
      <div class="card-header text-center">
-         <img src="http://localhost:8080/img/logo_besar.png" alt="Logo SIC" class="mw-100" style="height:50px">
+         <img src="<?= base_url() ?>/img/logo_besar.png" alt="Logo SIC" class="mw-100" style="height:50px">
          <div class="small text-center mt-2">
              Jl. Raya Taman Pagelaran No.2 Lt.2
              <br>
@@ -53,7 +53,7 @@
                  </div>
              </div>
          </div>
-         <button type="submit" class="btn btn-info btn-block">Login</button>
+         <button type="submit" class="btn btn-info btn-block"> Login </button>
          <?= form_close(); ?>
          <p class="small text-center text-muted pt-2">
              Register Account? <br>
