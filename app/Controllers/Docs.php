@@ -11,7 +11,7 @@ class Docs extends BaseController
         $this->kategoriModel = new \App\Models\KategoriModel();
         $this->jenisModel = new \App\Models\JenisModel();
         $this->userModel = new \App\Models\UserModel();
-        $this->akses = new \App\Models\folderaksesModel();
+        $this->akses = new \App\Models\FolderaksesModel();
         $this->validation = \Config\Services::validation();
         $this->mimeType = [
             'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',

@@ -10,7 +10,7 @@ class Home extends BaseController
 		$this->akses = new \App\Models\FolderaksesModel();
 		$this->docsModel = new \App\Models\DocsModel();
 		$this->fileModel = new \App\Models\FileModel();
-		$this->userModel = new \App\Models\userModel();
+		$this->userModel = new \App\Models\UserModel();
 		$this->jenisModel = new \App\Models\JenisModel();
 	}
 
